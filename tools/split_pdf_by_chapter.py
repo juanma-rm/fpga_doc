@@ -90,6 +90,7 @@ def parse_toc_markdown(toc_file: str) -> Dict[str, List[Dict]]:
             'number': None,
             'title': 'Chapters',
             'page': None,
+            'has_intro': False,
             'chapters': []
         }
     
@@ -112,6 +113,7 @@ def parse_toc_markdown(toc_file: str) -> Dict[str, List[Dict]]:
                 'number': section_num,
                 'title': section_title,
                 'page': page,
+                'has_intro': False,
                 'chapters': []
             }
             continue
@@ -152,6 +154,8 @@ def parse_toc_markdown(toc_file: str) -> Dict[str, List[Dict]]:
                 sections['appendices'] = {
                     'type': 'appendices',
                     'title': 'Appendices',
+                    'page': None,
+                    'has_intro': False,
                     'chapters': []
                 }
             
@@ -175,6 +179,8 @@ def parse_toc_markdown(toc_file: str) -> Dict[str, List[Dict]]:
                 sections['appendices'] = {
                     'type': 'appendices',
                     'title': 'Appendices',
+                    'page': None,
+                    'has_intro': False,
                     'chapters': []
                 }
             
@@ -190,6 +196,17 @@ def parse_toc_markdown(toc_file: str) -> Dict[str, List[Dict]]:
                 'page': page
             })
             continue
+    
+    # POST-PROCESSING: Detect section introductions
+    for section_key, section_data in sections.items():
+        chapters = section_data.get('chapters', [])
+        section_page = section_data.get('page')
+        
+        if chapters and section_page:
+            # Check if section page is different from first chapter page
+            first_chapter_page = chapters[0].get('page')
+            if first_chapter_page and section_page < first_chapter_page:
+                section_data['has_intro'] = True
     
     return sections
 
@@ -251,6 +268,8 @@ def create_folder_structure(sections: Dict, output_base_dir: str, pdf_path: str 
     
     for section_key, section_data in sections.items():
         chapters = section_data.get('chapters', [])
+        section_page = section_data.get('page')
+        has_intro = section_data.get('has_intro', False)
         
         # Create section folder only if we have actual sections
         if has_actual_sections:
@@ -260,9 +279,22 @@ def create_folder_structure(sections: Dict, output_base_dir: str, pdf_path: str 
             # Use root output_path for chapter-only format
             section_folder = output_path
         
+        # HANDLE SECTION INTRODUCTIONS
+        if has_intro and chapters:
+            first_chapter_page = chapters[0].get('page')
+            if first_chapter_page and section_page and section_page < first_chapter_page:
+                intro_end = first_chapter_page - 1
+                filename = 'section_intro.pdf'
+                output_file = section_folder / filename
+                stats['total'] += 1
+                
+                if extract_pdf_range(pdf_path, section_page, intro_end, str(output_file)):
+                    stats['success'] += 1
+                else:
+                    stats['errors'].append(f"Intro: {section_data.get('title', 'Unknown')}")
+        
         # Handle sections without chapters
         if not chapters:
-            section_page = section_data.get('page')
             if section_page:
                 next_section_page = total_pages
                 for other_key, other_data in sections.items():
@@ -270,7 +302,7 @@ def create_folder_structure(sections: Dict, output_base_dir: str, pdf_path: str 
                     if other_page and other_page > section_page:
                         next_section_page = min(next_section_page, other_page - 1)
                 
-                filename = f"{section_key.replace('section', '')[1:]}.pdf"
+                filename = 'section_intro.pdf'
                 output_file = section_folder / filename
                 stats['total'] += 1
                 
