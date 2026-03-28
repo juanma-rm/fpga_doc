@@ -1,4 +1,4 @@
-﻿# Vitis HLS UG1399 (v2025.2) â€” Complete Table of Contents
+﻿# Vitis HLS UG1399 (v2025.2) — Complete Table of Contents
 
 > Consolidated index of all chapters and sections.
 
@@ -283,13 +283,13 @@
 - [pragma HLS unroll](Section%20IV%20-%20Command%20Reference/ch17_hls_pragmas.md#pragma-hls-unroll)
 - [Best Practices](Section%20IV%20-%20Command%20Reference/ch17_hls_pragmas.md#best-practices)
 
-### [Chapter 18 — HLS Tcl Commands](Section IV - Command Reference/ch18_hls_tcl_commands.md)
+### [Chapter 18 — HLS Tcl Commands](Section%20IV%20-%20Command%20Reference/ch18_hls_tcl_commands.md)
 
-- [Project Commands](Section IV - Command Reference/ch18_hls_tcl_commands.md#project-commands)
-- [Configuration Commands](Section IV - Command Reference/ch18_hls_tcl_commands.md#configuration-commands)
-- [Optimization Directives](Section IV - Command Reference/ch18_hls_tcl_commands.md#optimization-directives)
-- [Quick Reference: Config Commands vs. Pragma Scope](Section IV - Command Reference/ch18_hls_tcl_commands.md#quick-reference-config-commands-vs-pragma-scope)
-- [Best Practices](Section IV - Command Reference/ch18_hls_tcl_commands.md#best-practices)
+- [Project Commands](Section%20IV%20-%20Command%20Reference/ch18_hls_tcl_commands.md#project-commands)
+- [Configuration Commands](Section%20IV%20-%20Command%20Reference/ch18_hls_tcl_commands.md#configuration-commands)
+- [Optimization Directives](Section%20IV%20-%20Command%20Reference/ch18_hls_tcl_commands.md#optimization-directives)
+- [Quick Reference: Config Commands vs. Pragma Scope](Section%20IV%20-%20Command%20Reference/ch18_hls_tcl_commands.md#quick-reference-config-commands-vs-pragma-scope)
+- [Best Practices](Section%20IV%20-%20Command%20Reference/ch18_hls_tcl_commands.md#best-practices)
 
 ---
 
