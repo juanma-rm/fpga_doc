@@ -42,6 +42,9 @@ import fitz  # PyMuPDF
 def parse_toc_markdown(toc_file: str) -> Dict[str, List[Dict]]:
     """
     Parse the TOC markdown file and extract chapter/section information.
+    Supports two formats:
+    1. Section-based: ## Section N: Title (page) with * **Chapter N: Title (page)**
+    2. Chapter-only: ## Chapter N: Title (page) (flat structure)
     
     Returns:
         Dict with structure:
@@ -68,6 +71,27 @@ def parse_toc_markdown(toc_file: str) -> Dict[str, List[Dict]]:
     
     section_counter = 0
     appendix_counter = 1
+    has_sections = False  # Track if we're using section-based format
+    
+    # First pass: detect format (section-based or chapter-only)
+    for line in lines:
+        if re.match(r'^## Section [IVX]+:', line):
+            has_sections = True
+            break
+        elif re.match(r'^## Chapter\s+\d+:', line):
+            has_sections = False
+            break
+    
+    # For chapter-only format, create a virtual section to hold all chapters
+    if not has_sections:
+        virtual_section_key = 'chapters'
+        sections[virtual_section_key] = {
+            'type': 'section',
+            'number': None,
+            'title': 'Chapters',
+            'page': None,
+            'chapters': []
+        }
     
     for i, line in enumerate(lines):
         line = line.rstrip()
@@ -92,7 +116,7 @@ def parse_toc_markdown(toc_file: str) -> Dict[str, List[Dict]]:
             }
             continue
         
-        # Match chapter headers: * **Chapter N: ... (page)**
+        # Match chapter headers in section-based format: * **Chapter N: ... (page)**
         chapter_match = re.match(r'^\* \*\*Chapter\s+(\d+):\s+(.+?)\s*\((\d+)\)\*\*$', line)
         if chapter_match and current_section_key:
             chapter_num = int(chapter_match.group(1))
@@ -100,6 +124,21 @@ def parse_toc_markdown(toc_file: str) -> Dict[str, List[Dict]]:
             page = int(chapter_match.group(3))
             
             sections[current_section_key]['chapters'].append({
+                'number': chapter_num,
+                'title': chapter_title,
+                'page': page
+            })
+            continue
+        
+        # Match chapter headers in chapter-only format: ## Chapter N: ... (page)
+        top_level_chapter_match = re.match(r'^## Chapter\s+(\d+):\s+(.+?)(?:\s*\((\d+)\))?$', line)
+        if top_level_chapter_match and not has_sections:
+            chapter_num = int(top_level_chapter_match.group(1))
+            chapter_title = top_level_chapter_match.group(2)
+            page = int(top_level_chapter_match.group(3)) if top_level_chapter_match.group(3) else None
+            
+            # Add to the virtual section
+            sections['chapters']['chapters'].append({
                 'number': chapter_num,
                 'title': chapter_title,
                 'page': page
@@ -120,6 +159,29 @@ def parse_toc_markdown(toc_file: str) -> Dict[str, List[Dict]]:
             appendix_letter = appendix_match.group(2)  # e.g., "A"
             appendix_title = appendix_match.group(3)
             page = int(appendix_match.group(4)) if appendix_match.group(4) else None
+            
+            sections['appendices']['chapters'].append({
+                'number': appendix_label,
+                'letter': appendix_letter,
+                'title': appendix_title,
+                'page': page
+            })
+            continue
+        
+        # Match top-level appendix headers: ## Appendix X: ... (page)
+        top_level_appendix_match = re.match(r'^## (Appendix\s+([A-Z])):\s+(.+?)(?:\s*\((\d+)\))?$', line)
+        if top_level_appendix_match:
+            if 'appendices' not in sections:
+                sections['appendices'] = {
+                    'type': 'appendices',
+                    'title': 'Appendices',
+                    'chapters': []
+                }
+            
+            appendix_label = top_level_appendix_match.group(1)  # e.g., "Appendix A"
+            appendix_letter = top_level_appendix_match.group(2)  # e.g., "A"
+            appendix_title = top_level_appendix_match.group(3)
+            page = int(top_level_appendix_match.group(4)) if top_level_appendix_match.group(4) else None
             
             sections['appendices']['chapters'].append({
                 'number': appendix_label,
@@ -179,12 +241,24 @@ def create_folder_structure(sections: Dict, output_base_dir: str, pdf_path: str 
     output_path = Path(output_base_dir)
     output_path.mkdir(parents=True, exist_ok=True)
     
+    # Detect if we have actual sections or just chapters (chapter-only format)
+    has_actual_sections = any(
+        s.get('type') == 'section' and s.get('number') and 'Section' in str(s.get('number', ''))
+        for s in sections.values()
+    )
+    
     stats = {'total': 0, 'success': 0, 'skipped': 0, 'errors': []}
     
     for section_key, section_data in sections.items():
         chapters = section_data.get('chapters', [])
-        section_folder = output_path / section_key
-        section_folder.mkdir(parents=True, exist_ok=True)
+        
+        # Create section folder only if we have actual sections
+        if has_actual_sections:
+            section_folder = output_path / section_key
+            section_folder.mkdir(parents=True, exist_ok=True)
+        else:
+            # Use root output_path for chapter-only format
+            section_folder = output_path
         
         # Handle sections without chapters
         if not chapters:
@@ -233,11 +307,23 @@ def create_folder_structure(sections: Dict, output_base_dir: str, pdf_path: str 
                         end_page = min(end_page, other_page - 1)
                 end_page = max(chapter_page, min(end_page, total_pages))
             
-            # Generate filename
-            num_prefix = str(chapter['number']).replace(' ', '_')
+            # Generate filename with "chapter" prefix for chapter-only format
+            if has_actual_sections:
+                num_prefix = str(chapter['number']).replace(' ', '_')
+                filename_prefix = num_prefix
+            else:
+                # Use "chapterN_" format for chapter-only format
+                # Handle different number types (int or string like "Appendix A")
+                num = chapter.get('number', '')
+                if isinstance(num, int):
+                    filename_prefix = f"chapter{num}"
+                else:
+                    # For appendixes or other non-numeric labels
+                    filename_prefix = f"chapter{str(num).replace(' ', '_').lower()}"
+            
             chapter_title_clean = re.sub(r'[^\w\s-]', '', chapter['title'])
             chapter_title_clean = re.sub(r'\s+', '_', chapter_title_clean).lower()
-            filename = f"{num_prefix}_{chapter_title_clean}.pdf"
+            filename = f"{filename_prefix}_{chapter_title_clean}.pdf"
             output_file = section_folder / filename
             
             stats['total'] += 1
