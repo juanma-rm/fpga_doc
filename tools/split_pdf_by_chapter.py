@@ -351,7 +351,11 @@ def create_folder_structure(sections: Dict, output_base_dir: str, pdf_path: str 
                     filename_prefix = f"chapter{num}"
                 else:
                     # For appendixes or other non-numeric labels
-                    filename_prefix = f"chapter{str(num).replace(' ', '_').lower()}"
+                    num_str = str(num).replace(' ', '_').lower()
+                    if 'appendix' in num_str:
+                        filename_prefix = num_str  # "appendix_a" instead of "chapterappendix_a"
+                    else:
+                        filename_prefix = f"chapter{num_str}"
             
             chapter_title_clean = re.sub(r'[^\w\s-]', '', chapter['title'])
             chapter_title_clean = re.sub(r'\s+', '_', chapter_title_clean).lower()
