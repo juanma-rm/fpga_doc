@@ -96,13 +96,21 @@ set_operating_conditions -junction_temp <value>
 
 > **Total Power = Static Power + Dynamic Power**
 
+### Static Power
+
+Static power (standby power) is the minimum continuous power supplied when the device is configured with a design but no external or internal switching activity is applied. Static power is a function of junction temperature — ensuring ambient temperature and thermal solution parameters are correctly modeled is critical for accurate power estimation.
+
+### Dynamic Power
+
+Dynamic power is the power consumed when the device is running an application and undergoing switching activity as clocks and datapaths toggle. Dynamic power is calculated based on the **average switching activity** of device circuits over a period of time.
+
 ### Factors Impacting Power
 
 | Factor | Impact |
 |--------|--------|
 | **Environmental** | Voltage and junction temperature affect power dissipation |
 | **Power rail consolidation** | Discrete rails enable power domain switching at cost of more regulators |
-| **Power model accuracy** | Evolves with device availability and manufacturing maturity |
+| **Power model accuracy** | Evolves with device availability and manufacturing maturity — estimation is only as accurate as the data entered |
 
 > **Power Tip:** Compare total power to budget during design process:
 > ```tcl
@@ -273,7 +281,18 @@ Configuration loads application-specific data into the device's volatile CMOS co
 | **INIT_B** | Connect to LED via driver with pull-up — indicates initialization completion and CRC errors |
 | **DONE** | Connect to LED via driver with pull-up |
 
-> **Recommended:** Choose configuration mode matching system requirements. Consider dedicated vs. dual-purpose pins, voltage restrictions on I/O banks, and suitable terminations.
+### Configuration Pins
+
+Choose the device configuration mode that best matches system requirements. Factors to consider:
+
+| Factor | Detail |
+|--------|--------|
+| **Dedicated vs. dual-purpose pins** | Each configuration mode dedicates certain pins; multi-function pins are temporarily used during configuration only, then released for general use |
+| **I/O bank voltage restrictions** | The selected configuration mode may place voltage restrictions on some device I/O banks |
+| **Pin terminations** | Choose suitable terminations for different configuration pins; use recommended pull-up/pull-down resistor values |
+| **Signal integrity** | Even though configuration clocks are slow speed, perform signal integrity analysis to ensure clean signals |
+
+> **Recommended:** Choose configuration mode matching system requirements. Evaluate dedicated vs. dual-purpose pin trade-offs and bank voltage implications early in the design.
 
 ---
 

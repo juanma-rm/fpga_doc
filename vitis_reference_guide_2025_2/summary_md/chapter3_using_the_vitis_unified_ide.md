@@ -51,13 +51,14 @@ python migrate.py --input <classic_export> --output <unified_workspace>
 
 ### Supported Project Types
 
-| Project Type | Supported | Limitations/Workarounds |
+| Project Type | Limitations | Workaround |
 |---|---|---|
-| HLS Component | Yes | — |
-| Application Component | Yes | Manual platform re-targeting may be needed |
-| AI Engine Component | Yes | — |
-| System Project | Partial | Some manual adjustments required |
-| Platform Component | Partial | Limited migration; may need recreation |
+| **Embedded Platforms** | Local BSP source changes not migrated; new BSP is created with settings applied. SW repositories added in Classic IDE not migrated (warning displayed). IP drivers from XSAs created with 2023.1 or older may not work. | Copy sources to new BSP manually. Migrate SW repos to lopper (see UG1400); add path to migration script. Regenerate the XSA. |
+| **Embedded Software Applications** | Applications referencing platforms outside the current workspace cannot be migrated. | Migrate the platform first, then update the application to use the new platform before migration. |
+| **HW Link** | Hardware linker options defined via "Extra V++ command line options" are not migrated. | Manually define these options in `hw_link.cfg` for the System project. |
+| **Accelerated Host Applications** | Only `-D` (defines), `-I` (include paths), `-L` (library paths), and `-l` (libraries) are migrated. | Set other compiler/linker settings manually in the Application component's C/C++ build settings. |
+| **HLS Component** | Fully supported | — |
+| **AI Engine Component** | Fully supported | — |
 
 ---
 

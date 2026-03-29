@@ -265,4 +265,12 @@ extern "C" float sqrtf(float);
 
 ---
 
+### See Also
+
+- [Chapter 6 — Data Types](../section2_hls_programmers_guide/ch06_data_types.md) — `half`, `ap_fixed`, floating-point types
+- [Chapter 31 — HLS IP Libraries](ch31_hls_ip_libraries.md) — DSP intrinsics and CORDIC
+- [Chapter 20 — Built-in Functions](ch20_builtin_functions.md) — Other built-in HLS functions
+
+---
+
 *Source: Vitis HLS User Guide UG1399 v2025.2, Chapter 23, pages 785–795*

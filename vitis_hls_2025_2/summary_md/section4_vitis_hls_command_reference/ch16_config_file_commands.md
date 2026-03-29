@@ -469,4 +469,12 @@ Where `<location>` is `function[/loop_label]`.
 
 ---
 
+### See Also
+
+- [Chapter 17 — HLS Pragmas](ch17_hls_pragmas.md) — Pragma equivalents of config-file directives
+- [Chapter 18 — HLS Tcl Commands](ch18_hls_tcl_commands.md) — Tcl equivalents of config-file commands
+- [Appendix A — Tcl to Config File Map](../appendices/appendix_a_tcl_config_map.md) — Complete mapping between Tcl and config file syntax
+
+---
+
 *Source: Vitis HLS User Guide UG1399 v2025.2, Section IV, Chapter 16, Pages 457–540*

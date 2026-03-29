@@ -516,7 +516,53 @@ ACC_T MAC(DATA_T din, COEF_T coef, ACC_T acc) {
 #pragma HLS EXPRESSION_BALANCE off    // disable balancing → preserve MULADD pattern
 ```
 
-**C++ class unroll limitation:** Loop induction variable must NOT be a class member — move it to a local variable or function argument.
+### 5.4 Unrolling Loops in C++ Classes
+
+> ⚠️ **Important:** When loops are used in C++ classes, the loop induction variable must **not** be a data member of the class — this prevents the loop from being unrolled.
+
+**Broken example** — `k` is a class member:
+```cpp
+template <typename T0, typename T1, typename T2, typename T3, int N>
+class loop_class {
+private:
+    pe_mac<T0, T1, T2> mac;
+public:
+    T0 shift[N];
+    int k;              // ← Class member — prevents UNROLL
+    T0 shift_output;
+
+    void exec(T1 *pcout, T0 *dataOut, T1 pcin, T3 coeff, T0 data, int col) {
+    Function_label0:;
+    #pragma HLS inline off
+        SRL: for (k = N-1; k >= 0; --k) {
+        #pragma HLS unroll   // ← FAILS: k is a class member
+            if (k > 0)
+                shift[k] = shift[k-1];
+            else
+                shift[k] = data;
+        }
+        *dataOut = shift_output;
+        shift_output = shift[N-1];
+        *pcout = mac.exec1(shift[4*col], coeff, pcin);
+    }
+};
+```
+
+**Fix:** Remove `k` as a class member and make it **local to the function**:
+```cpp
+    void exec(T1 *pcout, T0 *dataOut, T1 pcin, T3 coeff, T0 data, int col) {
+    Function_label0:;
+    #pragma HLS inline off
+        SRL: for (int k = N-1; k >= 0; --k) {  // ← Local variable — UNROLL works
+        #pragma HLS unroll
+            if (k > 0)
+                shift[k] = shift[k-1];
+            else
+                shift[k] = data;
+        }
+        // ...
+    }
+```
 
 ---
 
@@ -736,6 +782,16 @@ void dut(int in[M], int out[M]) {
 | **Manual burst** | Use `hls::burst_maxi` as a last resort; always pair each `read_request(N)` with N `read()` calls; same for write |
 | **Deadlock prevention** | Never queue more `read_request`s than `num_read_outstanding` before consuming with `read()` |
 | **Stencil kernels** | Use `#pragma HLS array_stencil` on 2D image arrays to auto-generate line+window buffers |
+
+---
+
+### See Also
+
+- [Chapter 2 — Abstract Parallel Programming](ch02_abstract_parallel_programming.md) — Dataflow and `hls::task` fundamentals
+- [Chapter 3 — Loops Primer](ch03_loops_primer.md) — Loop pipelining and unrolling basics
+- [Chapter 8 — Interfaces](ch08_interfaces.md) — AXI interface burst inference and struct alignment
+- [Chapter 17 — HLS Pragmas](../section4_vitis_hls_command_reference/ch17_hls_pragmas.md) — All optimization pragmas
+- [Chapter 31 — HLS IP Libraries](../section6_vitis_hls_libraries_reference/ch31_hls_ip_libraries.md) — DSP intrinsics for expression matching
 
 ---
 

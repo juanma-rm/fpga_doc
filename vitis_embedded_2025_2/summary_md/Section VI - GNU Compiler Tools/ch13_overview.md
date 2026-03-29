@@ -11,7 +11,7 @@ The Vivado Design Suite includes GCC for:
 
 - Supports C and C++ languages
 - Includes C, math, GCC, and C++ standard libraries
-- Uses GNU binutils (assembler, linker, object dump) based on GNU version 2.32 (2020.x)
+- Uses GNU binutils (assembler, linker, object dump) based on GNU version 2.31 (2019.x) and 2.32 (2020.x)
 
 > From the 2024.1 release, this guide supports MicroBlaze and MicroBlaze-V devices.
 

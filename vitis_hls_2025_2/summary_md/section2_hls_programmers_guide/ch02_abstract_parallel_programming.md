@@ -548,4 +548,13 @@ void dut(int in[N], int out[N], int n) {
 
 ---
 
+### See Also
+
+- [Chapter 28 — HLS Task Library](../section6_vitis_hls_libraries_reference/ch28_hls_task_library.md) — `hls::task` API reference
+- [Chapter 24 — HLS Stream Library](../section6_vitis_hls_libraries_reference/ch24_hls_stream_library.md) — `hls::stream` blocking/non-blocking API
+- [Chapter 30 — Stream of Blocks](../section6_vitis_hls_libraries_reference/ch30_hls_stream_of_blocks.md) — `hls::stream_of_blocks` for array-based dataflow
+- [Chapter 11 — Optimizing Techniques](ch11_optimizing_techniques.md) — Dataflow limitations, canonical dataflow coding style
+
+---
+
 *Summary generated from Vitis HLS User Guide UG1399 v2025.2 — Chapter 2: Abstract Parallel Programming Model for HLS, Pages 39–64.*

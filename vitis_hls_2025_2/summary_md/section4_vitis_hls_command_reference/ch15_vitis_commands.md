@@ -175,4 +175,12 @@ When Vitis HLS starts, it looks for an optional Tcl initialization script to con
 
 ---
 
+### See Also
+
+- [Chapter 14 — HLS Command Line](../section3_vitis_hls_flow_steps/ch14_hls_command_line.md) — `v++` invocation and scripting
+- [Chapter 16 — Config File Commands](ch16_config_file_commands.md) — Config-file directives for `vitis-run`
+- [Chapter 18 — HLS Tcl Commands](ch18_hls_tcl_commands.md) — Legacy Tcl command interface
+
+---
+
 *Source: Vitis HLS User Guide UG1399 v2025.2, Section IV, Chapter 15, Pages 454–456*

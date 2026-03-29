@@ -64,4 +64,11 @@ This prints the value of `i` at each iteration in C simulation, SW emulation, RT
 
 ---
 
+### See Also
+
+- [Chapter 7 — Unsupported Constructs](../section2_hls_programmers_guide/ch07_unsupported_constructs.md) — Why `printf` is unsupported in synthesis
+- [Chapter 20 — Built-in Functions](ch20_builtin_functions.md) — Other HLS-specific built-ins
+
+---
+
 *Source: Vitis HLS User Guide UG1399 v2025.2, Chapter 22, pages 783–784*

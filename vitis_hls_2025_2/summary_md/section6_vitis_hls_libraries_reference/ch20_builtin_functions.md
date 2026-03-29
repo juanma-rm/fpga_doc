@@ -55,4 +55,11 @@ int foo(int in0, int in1) {
 
 ---
 
+### See Also
+
+- [Chapter 23 — HLS Math Library](ch23_hls_math_library.md) — Math functions optimized for FPGA
+- [Chapter 31 — HLS IP Libraries](ch31_hls_ip_libraries.md) — DSP and URAM intrinsics
+
+---
+
 *Source: Vitis HLS User Guide UG1399 v2025.2, Chapter 20, page 729*

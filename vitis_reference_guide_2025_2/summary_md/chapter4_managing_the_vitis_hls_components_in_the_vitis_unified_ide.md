@@ -79,6 +79,17 @@ The recommended development flow progresses through these stages:
 6. **Analyze** — Review synthesis reports and viewers
 7. **Package** — Export RTL as IP catalog or XO
 
+### Code Analyzer
+
+The Code Analyzer runs alongside C Simulation and provides static analysis of the source code to identify optimization opportunities and potential issues before synthesis. Enable it by setting `csim.code_analyzer=true` in the HLS configuration file or through the Flow Navigator checkbox.
+
+```ini
+[hls]
+csim.code_analyzer=true
+```
+
+> **TIP:** Run Code Analyzer early in the development cycle to identify structural issues (e.g., suboptimal loop structures, memory access patterns) before investing time in C Synthesis.
+
 ---
 
 ## Using the RTL Blackbox Wizard

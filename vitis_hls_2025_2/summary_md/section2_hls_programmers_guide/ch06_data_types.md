@@ -13,6 +13,9 @@
 7. [Arbitrary Precision Floating-Point Library (`ap_float`)](#7-arbitrary-precision-floating-point-library-ap_float)
 8. [Global Variables](#8-global-variables)
 9. [Pointers](#9-pointers)
+10. [Vector Data Types](#10-vector-data-types)
+11. [Bit-Width Propagation](#11-bit-width-propagation)
+12. [Best Practices](#12-best-practices)
 10. [Best Practices](#10-best-practices)
 
 ---
@@ -452,7 +455,85 @@ void array_arith(dio_t d[5]) {
 
 ---
 
-## 10. Best Practices
+## 10. Vector Data Types
+
+The `hls::vector<T, N>` type models **single-instruction multiple-data (SIMD)** operations. Many operators are overloaded to provide SIMD behavior — all element-wise operations execute in parallel in hardware.
+
+```cpp
+#include "hls_vector.h"
+```
+
+| Parameter | Description |
+|---|---|
+| `T` | Element type (can be user-defined; must provide common arithmetic operations) |
+| `N` | Number of elements (must be a positive integer) |
+
+> **Best performance** is achieved when both the bit-width of `T` and `N` are integer powers of 2.
+
+### Example — 8-Element SIMD Multiply
+
+```cpp
+typedef hls::vector<int, 8> t_int8Vec;
+
+void processVecStream(hls::stream<t_int8Vec> &inVecStream1,
+                      hls::stream<t_int8Vec> &inVecStream2,
+                      hls::stream<t_int8Vec> &outVecStream) {
+    for (int i = 0; i < 32; i++) {
+        #pragma HLS pipeline II=1
+        t_int8Vec aVec = inVecStream1.read();
+        t_int8Vec bVec = inVecStream2.read();
+        // Performs a vector operation on 8 integers in parallel
+        t_int8Vec cVec = aVec * bVec;
+        outVecStream.write(cVec);
+    }
+}
+```
+
+All operations (`+`, `-`, `*`, `/`, `%`, bitwise, comparison, shifts) are applied element-wise. The synthesized hardware creates `N` parallel operator instances.
+
+> See [HLS Vector Library](../section6_vitis_hls_libraries_reference/ch27_hls_vector_library.md) for the complete API reference, alignment rules, and reduction operations. GitHub examples: `Vitis-HLS-Introductory-Examples/Modeling/using_vectors`.
+
+---
+
+## 11. Bit-Width Propagation
+
+Vitis HLS propagates bit-width information through the design hierarchy. If **function arguments** are accurately sized using arbitrary precision types, there is no need to size every intermediate variable — the compiler infers narrower operators automatically.
+
+### Example — Truncated Multiply (Suboptimal)
+
+```cpp
+#include "ap_int.h"
+
+ap_int<24> foo(int x, int y) {
+    int tmp;
+    tmp = (x * y);
+    return tmp;
+}
+```
+
+Result: a **32-bit multiplier** with the output truncated to 24 bits — wasteful hardware.
+
+### Example — Correctly Sized Inputs (Optimal)
+
+```cpp
+#include "ap_int.h"
+typedef ap_int<12> din_t;
+typedef ap_int<24> dout_t;
+
+dout_t func_sized(din_t x, din_t y) {
+    int tmp;
+    tmp = (x * y);
+    return tmp;
+}
+```
+
+Result: a **24-bit multiplier** — the 12-bit input types propagate through `tmp` and the compiler infers narrower hardware.
+
+> **Recommendation:** Correctly size the arguments of **all functions in the hierarchy** so that bit-width propagation produces the most efficient operators throughout the design.
+
+---
+
+## 12. Best Practices
 
 | Practice | Rationale |
 |---|---|
@@ -469,6 +550,15 @@ void array_arith(dio_t d[5]) {
 | **Keep `const` qualifier on read-only arrays for ROM inference** | Ensures array synthesizes as ROM (embedded in bitstream, zero runtime overhead) |
 | **Avoid `std::complex<long double>`** | Not supported |
 | **Do not use `-m32` build flag** | Library dependencies require 64-bit builds only |
+
+---
+
+### See Also
+
+- [Chapter 21 — Arbitrary Precision Data Types Library](../section6_vitis_hls_libraries_reference/ch21_arbitrary_precision_data_types.md) — Full `ap_int`/`ap_fixed` API reference
+- [Chapter 27 — HLS Vector Library](../section6_vitis_hls_libraries_reference/ch27_hls_vector_library.md) — `hls::vector` API, alignment, reduction ops
+- [Chapter 7 — Unsupported Constructs](ch07_unsupported_constructs.md) — Dynamic allocation, pointer restrictions
+- [Chapter 8 — Interfaces](ch08_interfaces.md) — How data types map to interface protocols
 
 ---
 

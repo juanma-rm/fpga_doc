@@ -6,6 +6,16 @@
 <Compiler_Name> [options] files...
 ```
 
+## Input Files
+
+The compilers take one or more of the following files as input:
+
+- C source files
+- C++ source files
+- Assembly files
+- Object files
+- Linker scripts (optional — if not specified, the default linker script embedded in the linker is used)
+
 ## Input/Output Files and Extensions
 
 | Extension | File Type |
@@ -57,6 +67,8 @@ int morefoo();
 ```
 
 > All Vivado drivers and libraries follow this convention in their header files. Include necessary headers when compiling with G++.
+
+To force a file to a particular language dialect regardless of extension, use the `-x lang` switch. Refer to the GCC documentation for more information.
 
 ## General Compiler Options
 
@@ -130,9 +142,13 @@ Where:
 | I/O memory | Memory-mapped peripheral addresses |
 | User/Program memory | Instructions, read-only data, read-write data, stack, heap |
 
-**MicroBlaze reserved memory:** 0x0–0x4F (reset, interrupt, exception vectors). Default text start: `0x50`.
+**Table 30: Hardware Reserved Memory Locations**
 
-> For Arm memory maps: UG585 (Zynq-7000), UG1085 (ZU+/Versal).
+| Processor Family | Reserved Memories | Reserved Purpose | Default Text Start Address |
+|-----------------|-------------------|-----------------|---------------------------|
+| MicroBlaze / MicroBlaze-V | 0x0 – 0x4F | Reset, Interrupt, Exception, and other reserved vector locations | 0x50 |
+
+> For Arm Cortex-A9 memory map: UG585 (Zynq-7000). For Cortex-R5F, Cortex-A53, Cortex-A72 memory map: UG1085 (ZU+/Versal).
 
 ## Object-File Sections
 

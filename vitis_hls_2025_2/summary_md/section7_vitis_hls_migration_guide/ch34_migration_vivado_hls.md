@@ -231,4 +231,12 @@ void top(std::complex<float> *out, const std::complex<float> *in) {
 
 ---
 
+### See Also
+
+- [Chapter 33 — Migrating to Unified IDE](ch33_migration_unified_ide.md) — Classic-to-Unified IDE migration
+- [Chapter 35 — Deprecated Features](ch35_deprecated_unsupported.md) — Deprecated libraries, pragmas, and Tcl commands
+- [Appendix A — Tcl to Config File Map](../appendices/appendix_a_tcl_config_map.md) — Tcl → config-file mapping
+
+---
+
 *Source: Vitis HLS User Guide UG1399 v2025.2, Chapter 34, pages 875–881*

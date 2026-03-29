@@ -244,4 +244,12 @@ for (int i = 0; i < N; i++) { ... }
 
 ---
 
+### See Also
+
+- [Chapter 6 — Data Types](ch06_data_types.md) — Supported types and pointer patterns
+- [Chapter 36 — Unsupported Features](../section7_vitis_hls_migration_guide/ch36_unsupported_features.md) — Additional unsupported pragmas and features
+- [Chapter 35 — Deprecated Features](../section7_vitis_hls_migration_guide/ch35_deprecated_unsupported.md) — Deprecated Tcl commands and libraries
+
+---
+
 *Summary generated from Vitis HLS User Guide UG1399 v2025.2 — Chapter 7: Unsupported C/C++ Constructs, Pages 151–156.*

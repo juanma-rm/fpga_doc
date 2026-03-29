@@ -156,4 +156,12 @@ HLS creates **3 separate, specialized copies** of `func` — one per call site:
 
 ---
 
+### See Also
+
+- [Chapter 3 — Loops Primer](ch03_loops_primer.md) — Loop pipelining (related to function pipelining)
+- [Chapter 2 — Abstract Parallel Programming](ch02_abstract_parallel_programming.md) — Dataflow across functions
+- [Chapter 17 — HLS Pragmas](../section4_vitis_hls_command_reference/ch17_hls_pragmas.md) — `INLINE`, `PIPELINE`, `FUNCTION_INSTANTIATE` pragma reference
+
+---
+
 *Summary generated from Vitis HLS User Guide UG1399 v2025.2 — Chapter 5: Functions Primer, Pages 100–103.*

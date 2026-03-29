@@ -133,4 +133,12 @@ hls/dsp/
 
 ---
 
+### See Also
+
+- [Chapter 36 — Unsupported Features](ch36_unsupported_features.md) — Completely removed features
+- [Chapter 34 — Migrating from Vivado HLS](ch34_migration_vivado_hls.md) — Replacement patterns for deprecated items
+- [Chapter 18 — HLS Tcl Commands](../section4_vitis_hls_command_reference/ch18_hls_tcl_commands.md) — Current Tcl command syntax
+
+---
+
 *Source: Vitis HLS User Guide UG1399 v2025.2, Chapter 35, pages 882–886*

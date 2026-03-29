@@ -211,7 +211,10 @@ vai_q_tensorflow quantize \
 | `--method` | Int | 1 | 0=non-overflow, 1=min-diffs, 2=min-diffs+depthwise |
 | `--calib_iter` | Int | 100 | Calibration iterations |
 | `--ignore_nodes` | String | — | Nodes to skip during quantization |
+| `--nodes_bit` | String | — | Per-node bit width. Format: `node:bits,...` (e.g., `conv1/Relu:16,conv1/weights:8,conv1:16`) |
+| `--nodes_method` | String | — | Per-node quantization method. Format: `node:method,...` (e.g., `conv1/Relu:1,depthwise_conv1/weights:2`) |
 | `--align_concat` | Int | 0 | 0=all, 1=output only, 2=disable |
+| `--align_pool` | Int | 0 | Align quantize position for maxpool/avgpool: 0=all, 1=output only, 2=disable |
 | `--simulate_dpu` | Int | 1 | Enable DPU simulation |
 | `--adjust_shift_bias` | Int | 1 | 0=disable, 1=static, 2=dynamic |
 | `--adjust_shift_cut` | Int | 1 | 0=disable, 1=static |
@@ -222,6 +225,8 @@ vai_q_tensorflow quantize \
 | `--output_format` | String | pb | pb or onnx |
 | `--output_dir` | String | ./quantize_results | Output directory |
 | `--gpu` | String | — | GPU device IDs |
+| `--gpu_memory_fraction` | Float | 0.5 | GPU memory fraction for quantization (0–1) |
+| `--config_file` | String | — | External configuration file path (feature under development) |
 
 ### Supported Operations (TF 1.x)
 
@@ -665,6 +670,59 @@ qat_processor.trainable_model()
 qat_processor.to_deployable(quantized_model, output_dir)
 qat_processor.export_xmodel(output_dir)
 ```
+
+### Inference of Quantized Model
+
+After quantization, the exported model can be run for inference in several formats.
+
+#### TorchScript Format
+
+Run a quantized `.pt` file using PyTorch. You must import `pytorch_nndct` first to register the quantized operators.
+
+```python
+import pytorch_nndct
+
+# Prepare input data
+input = ...  # preprocessed tensor
+
+quantized_model = torch.jit.load(quantized_model_path)
+output = quantized_model(input)
+```
+
+#### ONNX Format (Native Operators)
+
+For ONNX models with native Quantize/DeQuantize operators, use ONNX Runtime directly:
+
+```python
+import onnxruntime as ort
+
+input_data = ...  # preprocessed numpy array
+
+ort_sess = ort.InferenceSession(quantized_model_path)
+input_name = ort_sess.get_inputs()[0].name
+ort_output = ort_sess.run(None, {input_name: input_data})
+```
+
+#### ONNX Format (VAI Custom Operators)
+
+For ONNX models with VAI Quantize/DeQuantize operators, load custom ops via `pytorch_nndct` before running:
+
+```python
+from onnxruntime_extensions import PyOrtFunction
+from pytorch_nndct.apis import load_vai_ops
+
+# Register VAI custom ops before running the model
+load_vai_ops()
+
+input = ...  # preprocessed numpy array
+
+run_ort = PyOrtFunction.from_model(quantized_model_path)
+ort_outputs = run_ort(input)
+```
+
+#### XIR Format
+
+> **Important:** XIR format quantized models cannot be run by any inference tool. XIR is an intermediate representation consumed by the Vitis AI Compiler — use the compiled XMODEL output for deployment instead.
 
 ---
 

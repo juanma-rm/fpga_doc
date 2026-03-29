@@ -685,4 +685,12 @@
 
 ---
 
+### See Also
+
+- [Chapter 16 — HLS Config File Commands](ch16_config_file_commands.md) — Config-file equivalents of pragmas
+- [Chapter 18 — HLS Tcl Commands](ch18_hls_tcl_commands.md) — Tcl equivalents (optimization directives)
+- [Appendix A — Tcl to Config File Map](../appendices/appendix_a_tcl_config_map.md) — Complete cross-reference table
+
+---
+
 *Source: Vitis HLS User Guide UG1399 v2025.2, Chapter 17 (pp. 541–607)*

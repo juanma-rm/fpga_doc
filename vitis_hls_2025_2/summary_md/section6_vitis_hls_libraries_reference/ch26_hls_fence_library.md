@@ -141,4 +141,22 @@ void inputdatamover(..., config_t *fft_config, cmpxDataIn in[], cmpxDataIn xn[])
 
 ---
 
+## Best Practices
+
+| Practice | Rationale |
+|---|---|
+| **Use `hls::fence()` (full fence) as the default** | Ensures both read and write ordering; only use half-fences when you have a specific optimization need |
+| **List all objects that must be ordered as fence arguments** | Fences only constrain explicitly listed variables — omitting one allows the scheduler to reorder it |
+| **Do not use fences inside DATAFLOW regions** | Fences are only supported in pipeline or sequential scheduling contexts |
+| **Use fences to prevent deadlocks in multi-channel designs** | When a task writes to one stream and reads from another, fencing ensures the write completes before the read blocks |
+
+---
+
+### See Also
+
+- [Chapter 28 — HLS Task Library](ch28_hls_task_library.md) — Data-driven tasks where fences are commonly needed
+- [Chapter 24 — HLS Stream Library](ch24_hls_stream_library.md) — Stream operations that may require ordering constraints
+
+---
+
 *Source: Vitis HLS User Guide UG1399 v2025.2, Chapter 26, pages 815–817*

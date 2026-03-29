@@ -129,7 +129,7 @@ dtc -I dtb -O dts -f <file_name>.dtb -o <file_name>.dts
 
 | XSCT Command | Python API | Notes |
 |-------------|-----------|-------|
-| `domain create -name <name> -proc <cpu> -os <os>` | `platform.add_domain(cpu=<cpu>, os=<os>, name=<name>)` | |
+| `domain create -name <name> -proc <cpu> -os <os>` | `platform.add_domain(cpu=<cpu>, os=<os>, name=<name>)` | Additional XSCT args: `-desc`, `-display-name`, `-arch` (32/64-bit, A53 only), `-support-app`, `-auto-generate-linux`, `-sd-dir`, `-sysroot` |
 | `domain active <name>` | `platform.get_domain(name=<name>)` | Returns domain object |
 | `domain config -display-name <name>` | `domain.update_name(name=<name>)` | |
 | `domain config -sd-dir <path>` | `domain.set_sd_dir(path=<path>)` | Linux domains only |
@@ -137,9 +137,15 @@ dtc -I dtb -O dts -f <file_name>.dtb -o <file_name>.dts
 | `domain config -boot <dir>` | `domain.add_boot_dir(boot_dir=<dir>)` | |
 | `domain config -qemu-args <file>` | `domain.add_qemu_args(qemu_option="PS"/"PMC"/"PMU", file_name=<file>)` | |
 | `domain config -qemu-data <dir>` | `domain.add_qemu_data(data_dir=<dir>)` | |
+| `domain config -sw-repo <repos-list>` | — | Tcl list of software repository paths for picking drivers/libraries |
+| `domain config -mss <mss-file>` | — | Use specified MSS instead of generating one |
+| `domain config -readme <file>` | — | Add README with boot instructions |
+| `domain config -inc-path <path>` | — | Additional include path for applications in this domain |
+| `domain config -lib-path <path>` | — | Additional library search path for linker settings |
+| `domain config -sysroot <dir>` | — | Linux sysroot directory consumed during application build |
 | `domain list` | `platform.list_domain()` | |
-| `domain report <name>` | `domain.report(name=<name>)` | |
-| `domain remove <name>` | — | |
+| `domain report <name>` | `domain.report(name=<name>)` | Required: `name` = domain name |
+| `domain remove <name>` | — | Removes the specified domain |
 
 ### add_domain Arguments
 
@@ -214,6 +220,10 @@ dtc -I dtb -O dts -f <file_name>.dtb -o <file_name>.dts
 | `platform list` | `client.list_platforms()` | |
 | `platform report` | `platform.report()` | |
 | `platform remove <name>` | — | |
+| `platform config -extra-compiler-flags <param> <value>` | — | Set extra compiler flags for FSBL/PMUFW. Returns existing value if no value passed |
+| `platform config -extra-linker-flags <param> <value>` | — | Set extra linker flags for FSBL/PMUFW. Returns existing value if no value passed |
+| `platform config -reset-user-defined-flags <param>` | — | Reset extra compiler and linker flags for FSBL/PMUFW |
+| `platform config -report <param>` | — | Return list of extra compiler/linker flags for FSBL/PMUFW |
 | `platform config -samples <dir>` | *Not supported in Python CLI* | |
 | `platform config -prebuilt-data <dir>` | *Not supported in Python CLI* | |
 | `platform config -make-local` | *Not supported in Python CLI* | |

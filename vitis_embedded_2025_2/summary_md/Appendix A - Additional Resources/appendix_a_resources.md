@@ -16,6 +16,12 @@ Documentation resources, support references, and revision history for UG1400 (v2
 
 ---
 
+## Support Resources
+
+For support resources such as Answers, Documentation, Downloads, and Forums, see [Support](https://support.xilinx.com).
+
+---
+
 ## References
 
 | # | Document |

@@ -46,4 +46,11 @@ This appendix defines the internal HLS compiler instruction and operator names t
 
 ---
 
+### See Also
+
+- [Chapter 6 — Data Types](../section2_hls_programmers_guide/ch06_data_types.md) — Arbitrary-precision types and operator semantics
+- [Chapter 21 — Arbitrary Precision Data Types](../section6_vitis_hls_libraries_reference/ch21_arbitrary_precision_data_types.md) — `ap_int`/`ap_fixed` API reference
+
+---
+
 *Source: Vitis HLS User Guide UG1399 v2025.2, Appendix B, pages 898–899*

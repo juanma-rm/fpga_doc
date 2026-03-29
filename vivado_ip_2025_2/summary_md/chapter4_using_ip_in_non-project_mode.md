@@ -256,6 +256,21 @@ open_example_project -force -dir <project_location> -in_process [get_ips <ip>]
 launch_simulation
 ```
 
+### Synthesizing and Simulating an IP (No Example Design)
+
+If an IP does not deliver an example design but does deliver a test bench, simulate it directly:
+
+```tcl
+create_project <name> <dir> -part <part>
+# create_ip ... or add_files ip.xci
+create_ip_run [get_ips <ip_name>]
+launch_runs <ip>_synth_1
+wait_on_run <ip>_synth_1
+# Set the IP test bench as simulation top
+set_property top <tb> [current_fileset -simset]
+launch_simulation
+```
+
 ---
 
 ## Best Practices

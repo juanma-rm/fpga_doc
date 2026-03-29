@@ -257,6 +257,26 @@ vai_c_xir -x VoxelNet_int.xmodel \
 
 > **Samples:** 50+ common OP implementations at [vai_library/cpu_task/ops](https://github.com/Xilinx/Vitis-AI/tree/v3.5/src/vai_library/cpu_task/ops)
 
+### Profiling Custom OPs
+
+Use the `DEEPHI_PROFILING` environment variable to get per-OP timing breakdown when running models with custom operations:
+
+```bash
+env DEEPHI_PROFILING=1 ./sample_pointpillars_graph_runner ./model.xmodel input.bin
+```
+
+Example output:
+```
+CPU_UPDATE_INPUT  : 5us
+CPU_UPDATE_OUTPUT : 55us
+CPU_SYNC_FOR_READ : 46us
+CPU_OP_EXEC       : 32us
+CPU_OP_EXEC       : 36us
+CPU_OP_EXEC       : 232us
+CPU_OP_EXEC       : 26575us
+CPU_SYNC_FOR_WRITE: 1us
+```
+
 ---
 
 ## Programming with VOE
@@ -418,6 +438,89 @@ result = wego_mod(input)
 - `Tensor[]` input type not supported; replace with explicit `Tensor` inputs
 - Batch size at inference must match the batch size used during quantization export
 - Only a subset of DPU-supported operators is covered
+
+### WeGO-Torch C++ Classes and APIs
+
+WeGO-Torch also provides a C++ interface for compilation and inference, mirroring the Python API.
+
+#### `wego_torch::core::CompileOptions`
+
+C++ class specifying compilation options, passed as an argument to `wego_torch::core::Compile()`.
+
+| Type | Name | Description |
+|------|------|-------------|
+| `wego_torch::AccuracyMode` | `accuracy_mode` | `kDefaultRemoveFixNeuron` (remove redundant fixneurons for performance) or `kReserveFixNeuron` (keep all fixneurons for accuracy) |
+| `wego_torch::core::PartitionOptions` | `partition_options` | Partition configuration (min ops per DPU subgraph, extra accel ops) |
+| `std::vector<InputMeta>` | `inputs_meta` | Input metadata per model input |
+| `uint32_t` | `thread_parallel` | Thread parallelism optimization |
+| `uint32_t` | `core_parallel` | Core parallelism optimization |
+| `wego_torch::core::DebugOptions` | `debug_options` | Debug configuration |
+
+#### `wego_torch::core::PartitionOptions`
+
+| Type | Name | Description |
+|------|------|-------------|
+| `uint32_t` | `wego_subgraph_min_ops_number` | Minimum operators for a DPU subgraph (0 = no limit). Prevents small subgraphs from being dispatched to DPU where memory transfer overhead would dominate. |
+| `std::vector<std::string>` | `extra_accel_op_list` | Operators to explicitly accelerate on DPU: `aten::mul`, `aten::mean`, `aten::linear`, `aten::unsqueeze`, `aten::slice` |
+
+#### `wego_torch::core::DebugOptions`
+
+| Type | Name | Description |
+|------|------|-------------|
+| `bool` | `accuracy_debug` | Set `true` to dump subgraph inputs/outputs for accuracy debugging (default: `false`) |
+
+#### `wego_torch::InputMeta`
+
+Describes one input tensor's type and shape. WeGO-Torch requires static type and shape for compilation.
+
+| Type | Name | Description |
+|------|------|-------------|
+| `wego_torch::DataType` | `type_` | `kBool`, `kInt32`, or `kFloat32` |
+| `wego_torch::ShapeType` | `input_shape_` | Input tensor dimensions |
+
+#### `wego_torch::TargetInfo`
+
+Wrapper for DPU target information.
+
+| Type | Name | Description |
+|------|------|-------------|
+| `std::string` | `name` | DPU target name |
+| `uint64_t` | `fingerprint` | DPU target fingerprint |
+| `bool` | `is_fingerprint_driven` | Whether DPU subgraphs are compiled by fingerprint or target name |
+| `uint32_t` | `batch` | Batch size supported by the DPU target |
+
+#### Core C++ APIs
+
+| Function | Signature | Description |
+|----------|-----------|-------------|
+| `Compile` | `torch::jit::Module Compile(const torch::jit::Module &module, CompileOptions options)` | Compile a quantized TorchScript module into an optimized module |
+| `GetTargetInfo` | `TargetInfo GetTargetInfo()` | Query DPU target info (name, fingerprint, batch) |
+| `getVersionInfo` | `std::string getVersionInfo()` | Get WeGO-Torch version string |
+
+#### C++ Example
+
+```cpp
+#include <wego_torch/core.h>
+
+// Load quantized TorchScript module
+auto mod = torch::jit::load(quantized_model_path);
+
+// Configure compilation options
+auto options = wego_torch::core::CompileOptions();
+options.inputs_meta = {
+    wego_torch::InputMeta(wego_torch::DataType::kFloat32, {1, 3, 224, 224})
+};
+
+// Compile
+auto wego_mod = wego_torch::core::Compile(mod, options);
+
+// Query target info
+auto target_info = wego_torch::core::GetTargetInfo();
+auto batch = target_info.batch;
+
+// Run inference
+auto output = wego_mod.forward({input_tensor});
+```
 
 ### WeGO-TensorFlow 2.x
 

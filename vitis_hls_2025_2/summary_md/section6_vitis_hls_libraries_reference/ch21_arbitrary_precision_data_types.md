@@ -723,5 +723,11 @@ ap_ufixed<62, 2> pi = "0b11.0010010000111111011010101000100010000101101000110000
 | Signed ↔ unsigned boundary crossing | `AP_TRN_ZERO` | `AP_SAT_SYM` |
 
 ---
+### See Also
 
+- [Chapter 6 — Data Types](../section2_hls_programmers_guide/ch06_data_types.md) — Data type overview, bit-width propagation, vector types
+- [Appendix B — Operators](../appendices/appendix_b_operators.md) — `ap_int`/`ap_fixed` operator reference
+- [Chapter 27 — HLS Vector Library](ch27_hls_vector_library.md) — `hls::vector` SIMD operations
+
+---
 *Summary generated from Vitis HLS UG1399 v2025.2 — Chapter 21, Pages 730–782.*

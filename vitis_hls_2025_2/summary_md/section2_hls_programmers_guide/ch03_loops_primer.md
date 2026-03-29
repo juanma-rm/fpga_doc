@@ -415,4 +415,13 @@ LOOP_X: for (x = 0; x < N; x++) {      // N = 32 (compile-time constant)
 
 ---
 
+### See Also
+
+- [Chapter 4 — Arrays Primer](ch04_arrays_primer.md) — Array partitioning to resolve port contention in pipelined loops
+- [Chapter 5 — Functions Primer](ch05_functions_primer.md) — Function pipelining and inlining
+- [Chapter 17 — HLS Pragmas](../section4_vitis_hls_command_reference/ch17_hls_pragmas.md) — `PIPELINE`, `UNROLL`, `LOOP_MERGE`, `LOOP_FLATTEN` pragma reference
+- [Chapter 10 — Performance Pragma](ch10_performance_pragma.md) — `PERFORMANCE` pragma as an alternative to manual pipeline/unroll
+
+---
+
 *Summary generated from Vitis HLS User Guide UG1399 v2025.2 — Chapter 3: Loops Primer, Pages 65–84.*

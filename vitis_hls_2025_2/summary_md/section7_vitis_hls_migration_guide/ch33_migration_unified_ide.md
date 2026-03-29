@@ -115,4 +115,11 @@ After generating the config file, create HLS components in the Unified IDE by po
 
 ---
 
+### See Also
+
+- [Chapter 12 — Launching Vitis IDE](../section3_vitis_hls_flow_steps/ch12_launching_vitis_ide.md) — Unified IDE setup and flow
+- [Chapter 34 — Migrating from Vivado HLS](ch34_migration_vivado_hls.md) — Vivado HLS → Vitis HLS migration
+
+---
+
 *Source: Vitis HLS User Guide UG1399 v2025.2, Chapter 33, pages 873–874*

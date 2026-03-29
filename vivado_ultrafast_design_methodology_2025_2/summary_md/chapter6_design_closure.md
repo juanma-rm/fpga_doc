@@ -1127,13 +1127,13 @@ RX margin analysis (eye scan plots) on UltraScale/UltraScale+ GT transceivers. C
 
 ### Modifying Debug Probes Post-Implementation
 
-- **Replace debug nets:** Use Engineering Change Order (ECO) flow on placed/routed checkpoint
-- **Add/delete/edit ILA cores:** Use **Incremental Compile** flow from synthesized DCP with reference implemented checkpoint
-- **Net to external pin:** ECO flow to route internal net to free device I/O
+- **Replace debug nets:** Use the Engineering Change Order (ECO) flow on a placed/routed checkpoint to modify nets on existing ILA cores without full re-implementation. See UG904 for ECO flow details.
+- **Add/delete/edit ILA cores:** Use the **Incremental Compile** flow from a synthesized DCP with a reference implemented checkpoint. This can save significant time versus full re-implementation. See UG908 for incremental debug core insertion.
+- **Net to external pin:** Use the ECO flow to bring an internal net out to a free device I/O pin for external debug equipment — useful when debugging requires measurements not obtainable through ILA/VIO. Requires an unused I/O pin on the device.
 
 ### Remote Debugging
 
-Use **Vivado hardware server** to connect to remote lab computers.
+Use the **Vivado hardware server** (`hw_server`) to connect to a remote computer in the lab for debug or design upgrades. See UG908 for remote connection setup.
 
 ---
 

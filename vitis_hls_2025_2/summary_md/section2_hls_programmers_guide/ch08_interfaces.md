@@ -26,13 +26,14 @@
    - 6.3 [Register Modes](#63-register-modes)
    - 6.4 [Coding Patterns](#64-coding-patterns)
 7. [Aggregation and Disaggregation of Structs](#7-aggregation-and-disaggregation-of-structs)
-8. [Block-Level Control Protocols](#8-block-level-control-protocols)
-9. [Execution Modes](#9-execution-modes)
-   - 9.1 [Auto-Restart](#91-auto-restart)
-   - 9.2 [Mailbox](#92-mailbox)
-10. [Vivado IP Port-Level Protocols](#10-vivado-ip-port-level-protocols)
-11. [Initialization and Reset Behavior](#11-initialization-and-reset-behavior)
-12. [Best Practices](#12-best-practices)
+8. [Memory Layout Model](#8-memory-layout-model)
+9. [Block-Level Control Protocols](#9-block-level-control-protocols)
+10. [Execution Modes](#10-execution-modes)
+   - 10.1 [Auto-Restart](#101-auto-restart)
+   - 10.2 [Mailbox](#102-mailbox)
+11. [Vivado IP Port-Level Protocols](#11-vivado-ip-port-level-protocols)
+12. [Initialization and Reset Behavior](#12-initialization-and-reset-behavior)
+13. [Best Practices](#13-best-practices)
 
 ---
 
@@ -432,7 +433,102 @@ void kernel(hls::stream<AB> &in, ...) {
 
 ---
 
-## 8. Block-Level Control Protocols
+## 8. Memory Layout Model
+
+The memory layout model defines how data is arranged and accessed when communicating between the host CPU and the FPGA accelerator kernel. It governs **data alignment** and **data structure padding** — both critical for correct data exchange across the host/kernel boundary.
+
+### Data Alignment
+
+Processors access memory in 2, 4, 8, 16, or 32-byte chunks — addresses must be multiples of these sizes. Misaligned access can cause incorrect results, performance degradation, or application hangs.
+
+| Type | 32-bit x86 GNU/Linux | 64-bit x86 GNU/Linux |
+|---|---|---|
+| | Size | Align | Size | Align |
+| `bool` | 1 | 1 | 1 | 1 |
+| `char` | 1 | 1 | 1 | 1 |
+| `short int` | 2 | 2 | 2 | 2 |
+| `int` | 4 | 4 | 4 | 4 |
+| `long int` | 4 | 4 | 8 | 8 |
+| `long long int` | 8 | 4 | 8 | 8 |
+| `float` | 4 | 4 | 4 | 4 |
+| `double` | 8 | 4 | 8 | 8 |
+| `long double` | 12 | 4 | 16 | 16 |
+| `void*` | 4 | 4 | 8 | 8 |
+
+**Custom alignment:**
+```cpp
+int x __attribute__((aligned(16))) = 0;  // Force 16-byte alignment
+```
+
+The `aligned` attribute can only **increase** alignment, never decrease it. Use `offsetof` to determine member alignment in structures.
+
+### Data Structure Padding
+
+The compiler inserts padding bytes between struct members to maintain alignment. **Field order matters:**
+
+```cpp
+struct One {   // Total: 12 bytes (with padding)
+    short s;   // 2 bytes + 2 bytes padding
+    int i;     // 4 bytes
+    char c;    // 1 byte + 3 bytes padding
+};
+
+struct Two {   // Total: 8 bytes (no wasted padding)
+    int i;     // 4 bytes
+    char c;    // 1 byte
+    short s;   // 2 bytes + 1 byte end-padding
+};
+```
+
+> Reordering fields from largest to smallest alignment minimizes padding waste.
+
+**Packed structs** (`__attribute__((packed))`) eliminate padding but allow misaligned access — use with caution as it may force byte-by-byte memory operations.
+
+### Vitis HLS Alignment Rules
+
+| Context | Default Behavior | Compact Mode |
+|---|---|---|
+| **AXI interfaces** (`m_axi`, `s_axilite`, `axis`) | Aggregate with x86_64-gnu-linux padding, total width padded to nearest power-of-2 | `compact=none` (default) |
+| **Other interfaces** (`ap_fifo`, `ap_memory`) | Aggregate at bit-level (no padding) | `compact=bit` (default) |
+| **Internal variables** | Disaggregated (separate signals per member) | Apply `AGGREGATE` pragma for `compact=bit` or `compact=byte` |
+| **Structs with `hls::stream`** | Always disaggregated | N/A |
+
+### Impact of Struct Size on Pipelining
+
+If a struct's size is **not** a power of 2, AXI burst reads/writes misalign across bus words, causing **II violations**:
+
+```cpp
+struct A {          // 192 bits (24 bytes) — NOT power-of-2
+    int s_1, s_2, s_3, s_4, s_5, s_6;
+};
+// m_axi port auto-sized to 256 bits → misaligned writes → II=2 instead of II=1
+```
+
+⚠️ **Warning:** `WARNING: [HLS 200-880] The II Violation in module ... Unable to enforce a carried dependence constraint (II = 1, distance = 1, offset = 1)`
+
+**Three solutions to fix struct alignment:**
+
+```cpp
+// Solution 1: Add explicit padding fields
+struct A {
+    int s_1, s_2, s_3, s_4, s_5, s_6;
+    int pad_1, pad_2;  // Pad to 256 bits (32 bytes)
+};
+
+// Solution 2: Use __attribute__((aligned))
+struct A {
+    int s_1, s_2, s_3, s_4, s_5, s_6;
+} __attribute__((aligned(32)));
+
+// Solution 3: Use C++ alignas specifier
+struct alignas(32) A {
+    int s_1, s_2, s_3, s_4, s_5, s_6;
+};
+```
+
+---
+
+## 9. Block-Level Control Protocols
 
 The block-level protocol manages **when** the kernel starts, stops, and signals completion to the host or upstream logic:
 
@@ -459,9 +555,9 @@ The block-level protocol manages **when** the kernel starts, stops, and signals 
 
 ---
 
-## 9. Execution Modes
+## 10. Execution Modes
 
-### 9.1 Auto-Restart
+### 10.1 Auto-Restart
 
 Auto-restart allows a kernel to re-launch **immediately** after each completion without host intervention:
 
@@ -505,7 +601,7 @@ run_top(5, top, input, output, adder_val);
 7. No mailbox support in cosim
 8. Arrays-to-Stream FIFO interfaces not supported
 
-### 9.2 Mailbox
+### 10.2 Mailbox
 
 Mailbox enables **semi-synchronous** parameter updates for continuously running kernels:
 
@@ -546,7 +642,7 @@ if (reset_value.valid())
 
 ---
 
-## 10. Vivado IP Port-Level Protocols
+## 11. Vivado IP Port-Level Protocols
 
 Complete list of port-level protocols for **Vivado IP flow** (non-AXI assignments):
 
@@ -572,7 +668,7 @@ Complete list of port-level protocols for **Vivado IP flow** (non-AXI assignment
 
 ---
 
-## 11. Initialization and Reset Behavior
+## 12. Initialization and Reset Behavior
 
 ### Initialization
 
@@ -612,7 +708,7 @@ static int state_var = 42;
 
 ---
 
-## 12. Best Practices
+## 13. Best Practices
 
 | Topic | Recommendation |
 |---|---|
@@ -629,6 +725,16 @@ static int state_var = 42;
 | **Mailbox** | Use mailbox only when scalar updates are needed between kernel iterations; do not change mid-run |
 | **Reset scope** | Use `reset=control` (default) unless you need to restore static/global state; avoid `reset=all` on large arrays |
 | **LCS pattern** | Structure kernels as Load–Compute–Store tasks to maximize data-movement / compute overlap |
+
+---
+
+### See Also
+
+- [Chapter 9 — M_AXI Best Practices](ch09_maxi_best_practices.md) — Burst optimization, port width, concurrent ports
+- [Chapter 6 — Data Types](ch06_data_types.md) — `ap_int`, `ap_fixed`, `ap_float`, composite types
+- [Chapter 2 — Abstract Parallel Programming](ch02_abstract_parallel_programming.md) — Dataflow, `hls::task`, control/data-driven TLP
+- [Chapter 17 — HLS Pragmas](../section4_vitis_hls_command_reference/ch17_hls_pragmas.md) — `INTERFACE`, `AGGREGATE`, `DISAGGREGATE` pragma reference
+- [Chapter 19 — AXI4-Lite C Driver](../section5_vitis_hls_c_driver_reference/ch19_axi4lite_driver.md) — `s_axilite` driver API
 
 ---
 

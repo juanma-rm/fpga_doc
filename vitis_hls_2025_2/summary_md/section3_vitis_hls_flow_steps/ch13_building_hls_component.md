@@ -851,3 +851,16 @@ Three flows to access pre-built L1 HLS functions:
 | **Component exploration** | Clone components to preserve working implementations while experimenting |
 | **Float RTL sim** | Compile simulation libraries for third-party simulators via `compile_simlib` in Vivado Tcl |
 | **Co-sim requirements** | AP ctrl protocol or II=1 or combinational or all-streaming interfaces required |
+
+---
+
+### See Also
+
+- [Chapter 12 — Launching the Vitis Unified IDE](ch12_launching_vitis_ide.md) — IDE startup and workspace setup
+- [Chapter 14 — HLS Command Line](ch14_hls_command_line.md) — Command-line equivalents of all IDE operations
+- [Chapter 16 — HLS Config File Commands](../section4_vitis_hls_command_reference/ch16_config_file_commands.md) — All `syn.*`, `csim.*`, `cosim.*`, `vivado.*` settings
+- [Chapter 17 — HLS Pragmas](../section4_vitis_hls_command_reference/ch17_hls_pragmas.md) — Pragma reference for optimization directives
+
+---
+
+*Source: Vitis HLS User Guide UG1399 v2025.2, Chapter 13: Building and Running an HLS Component, Pages 336–448.*

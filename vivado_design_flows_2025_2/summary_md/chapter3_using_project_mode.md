@@ -378,13 +378,81 @@ Or via the IDE: **Tools → Compile Simulation Libraries**
 
 > **Recommended:** Run simulations at **1 ps** resolution. Some primitives (e.g., MMCM) require 1 ps for correct behavior.
 
+> **Tip:** There is no significant simulator performance gain from using coarser resolution with AMD simulation models, and no need to use finer resolution (e.g., femtoseconds).
+
+### Functional Simulation Early in the Design Flow
+
+Use RTL behavioral simulation to verify syntax and functionality before synthesis:
+
+- Simulate individual IP, block designs, or hierarchical modules before testing the complete design
+- Create a top-level test bench after individual module verification succeeds
+- Reuse the same test bench for final timing simulation
+
+> **Recommended:** At this stage, no timing information is provided. Perform simulation in **unit-delay mode** to avoid race conditions.
+
+> Use **synthesizable HDL constructs** for initial design creation. Do not instantiate specific components unless necessary — this allows for more portable, reusable code.
+
+### Using Structural Netlists for Simulation
+
+After synthesis or implementation, netlist simulation (functional or timing mode) helps identify:
+
+- **Synthesis attribute mismatches** (e.g., `full_case`, `parallel_case`)
+- **UNISIM attributes** applied in XDC constraint files
+- **Synthesis vs. simulation interpretation differences**
+- **Dual-port RAM collisions**
+- **Missing or improperly applied timing constraints**
+- **Asynchronous path operation issues**
+- **Functional issues from optimization techniques**
+
+Additional use cases for netlist simulation:
+- Sensitize timing paths declared as false or multi-cycle during STA
+- Generate netlist switching activity to estimate power
+- Identify **X state pessimism**
+
+#### Simulation Libraries
+
+| Library | Description | VHDL Name | Verilog Name |
+|---|---|---|---|
+| **UNISIM** | Functional simulation of AMD primitives | UNISIM | UNISIMS_VER |
+| **UNIMACRO** | Functional simulation of AMD macros | UNIMACRO | UNIMACRO_VER |
+| **UNIFAST** | Fast simulation library (7 series only) | UNIFAST | UNIFAST_VER |
+
+> **UNIFAST** is optional for faster functional simulation on 7 series devices. UltraScale and later architectures incorporate UNIFAST optimizations into the UNISIM libraries by default.
+
+> **UNISIM primitive behavior:** No timing information except on clocked elements (100 ps clock-to-out delay to prevent race conditions). Waveforms may show spikes/glitches for combinatorial signals.
+
+### Timing Simulation
+
+AMD supports timing simulation in **Verilog only**:
+
+- Export a netlist from a synthesized or implemented design: **File → Export → Export Netlist** or `write_verilog`
+- The `$sdf_annotate` Verilog system task specifies the SDF file for timing delays
+- Use the `-sdf_anno` option in **Simulation Settings → Netlist** tab to add the SDF annotation directive
+- Write the SDF file with the `write_sdf` command
+- The Vivado simulator reads the SDF file automatically during compilation
+
+> **Tip:** The Vivado simulator supports mixed-language simulation — VHDL users can generate a Verilog simulation netlist and instantiate it from a VHDL test bench.
+
+**If you skip timing simulation**, ensure:
+- STA constraints are correct (especially exceptions)
+- The netlist is exactly equivalent to your RTL intent (watch for inference-related changes)
+
 ### Running Simulation
 
-#### From the Vivado IDE
-- In the Flow Navigator, click **Run Simulation** and select the simulation type
+#### Integrated Simulation
+
+The Vivado IDE supports integrated simulation — launch the simulator directly from the IDE:
+
+- Flow Navigator → click **Run Simulation** and select the simulation type
 - Configurable simulation settings in **Tools → Settings → Simulation**
+- Tcl command: `launch_simulation`
+
+> ⚠️ The `launch_simulation` command supports **Project Mode only** — it does not support Non-Project Mode.
 
 #### Batch Simulation
+
+> **Recommended:** If your verification environment has a self-checking test bench, run simulation in batch mode. There is a **significant runtime cost** when viewing waveforms via integrated simulation.
+
 Use the `export_simulation` Tcl command:
 - Generates separate scripts for compile, elaborate, and simulate stages
 - Scripts can be used directly or as reference for custom scripts
@@ -594,6 +662,14 @@ Pre-defined layouts for specific tasks:
 - Creates a new constraint file preserving originals
 - Optionally make it the active constraint set
 
+### Closing Designs
+
+You can close designs to reduce the number of designs in memory and prevent multiple locations where sources can be edited. In some cases, you are prompted to close a design prior to changing to another design representation.
+
+**Close methods:**
+- In the design title bar, click the close button (**X**)
+- In the Flow Navigator, right-click the design and select **Close**
+
 ### Analyzing Implementation Results
 
 In an implemented design:
@@ -653,6 +729,7 @@ Modify debug cores or probes in an implemented design checkpoint and generate up
 | `launch_runs -to_step` | Launches implementation incrementally, including bitstream generation |
 | `wait_on_run` | Blocks until the run completes before processing next commands |
 | `open_run` | Opens synthesized or implemented design for reporting and analysis |
+| `launch_simulation` | Runs integrated simulation (Project Mode only) |
 | `close_design` | Closes the in-memory design |
 | `start_gui` | Opens the Vivado IDE with current design |
 | `stop_gui` | Closes the Vivado IDE with current design |
@@ -763,6 +840,7 @@ start_gui
 |---|---|---|
 | Create project | Create Project wizard | `create_project` |
 | Add sources | File → Add Sources | `add_files` |
+| Run simulation | Flow Navigator → Run Simulation | `launch_simulation` |
 | Run synthesis | Flow Navigator → Run Synthesis | `launch_runs synth_1` |
 | Run implementation | Flow Navigator → Run Implementation | `launch_runs impl_1` |
 | Generate bitstream | Flow Navigator → Generate Bitstream | `launch_runs impl_1 -to_step write_bitstream` |

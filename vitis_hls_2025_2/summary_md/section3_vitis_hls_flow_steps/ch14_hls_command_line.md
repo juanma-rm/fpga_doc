@@ -179,6 +179,31 @@ syn.output.format=xo          # xo = Vitis kernel; ip_catalog = Vivado IP
 | Implementation | `vitis-run --mode hls --impl --config <cfg> --work_dir <dir>` |
 | Export IP/XO | `vitis-run --mode hls --package --config <cfg> --work_dir <dir>` |
 
+---
+
+## Best Practices
+
+| Practice | Rationale |
+|---|---|
+| **Keep one config file per HLS component** | Consolidates all settings (sources, part, clock, pragmas) in a single, version-controllable file |
+| **Run C Simulation before C Synthesis** | Validates functional correctness at C level; fixing bugs after synthesis is far more expensive |
+| **Use `--work_dir` consistently** | All downstream steps (cosim, package, impl) rely on artifacts in the work directory |
+| **Set `cosim.trace_level=port` for debugging** | Generates waveforms viewable in Vivado for I/O-level debugging without excessive file sizes |
+| **Use `syn.output.format=xo` for Vitis flow, `ip_catalog` for Vivado IP flow** | Mismatched output format causes integration failures downstream |
+| **Automate builds with shell scripts** | Chain `v++` and `vitis-run` calls in a script for reproducible, CI-friendly builds |
+
+---
+
+### See Also
+
+- [Chapter 13 — Building and Running an HLS Component](ch13_building_hls_component.md) — IDE-based equivalent of command-line operations
+- [Chapter 15 — Vitis Commands](../section4_vitis_hls_command_reference/ch15_vitis_commands.md) — `vitis`, `v++`, `vitis-run` detailed reference
+- [Chapter 16 — HLS Config File Commands](../section4_vitis_hls_command_reference/ch16_config_file_commands.md) — All `syn.*`, `cosim.*`, `vivado.*` settings
+
+---
+
+*Source: Vitis HLS User Guide UG1399 v2025.2, Chapter 14: Creating HLS Components from the Command Line, Pages 449–452.*
+
 ### Minimum Config File Fields by Step
 
 | Step | Required Config Fields |

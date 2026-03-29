@@ -100,6 +100,22 @@ Package custom RTL as IP-XACT components using the IP Packager. This enables reu
 
 Use the Vivado Design Suite HDL Templates (accessible via **Tools → Language Templates**) for coding common structures: RAM, ROM, DSP, FIFO, shift registers, state machines, etc.
 
+### FSM Coding Guidelines
+
+Vivado synthesis applies state machine encoding optimization by default. Key considerations:
+
+- **One-hot encoding** is the default for FPGA targets — Vivado synthesis generally uses one-hot encoding for state machines, which provides fast state transitions at the cost of more registers
+- Use `FSM_EXTRACTION` synthesis attribute to control FSM encoding: `(* FSM_ENCODING = "one_hot" *)`, `"sequential"`, `"johnson"`, `"gray"`, `"auto"`, or `"none"`
+- Use `BLOCK_SYNTH.FSM_EXTRACTION OFF` to disable FSM optimization on specific hierarchy levels
+- Initialize state registers to match the desired reset state to avoid simulation mismatches
+
+### Avoiding Unintentional Latch Inference
+
+- Incomplete `if`/`case` blocks in combinational always blocks infer latches — ensure all branches assign all outputs
+- Latches are difficult to time and consume additional resources
+- Use `full_case` / `parallel_case` Verilog directives where appropriate, but understand their simulation vs. synthesis semantics
+- The Vivado synthesis log reports latch inference warnings — investigate and resolve these
+
 ### Control Signals and Control Sets
 
 A **control set** is the unique combination of clock, clock enable (CE), and set/reset (SR) driving a group of registers within a slice. Excessive unique control sets reduce packing density and increase power.

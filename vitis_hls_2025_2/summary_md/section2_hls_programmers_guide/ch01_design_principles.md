@@ -256,4 +256,12 @@ Benefits of streaming-based design:
 
 ---
 
+### See Also
+
+- [Chapter 2 — Abstract Parallel Programming](ch02_abstract_parallel_programming.md) — Dataflow, `hls::task`, control/data-driven TLP
+- [Chapter 3 — Loops Primer](ch03_loops_primer.md) — Pipelining, unrolling, loop optimization
+- [Section I — Introduction](../section1_introduction/section_intro.md) — HLS overview, refactoring patterns, load-compute-store
+
+---
+
 *Summary generated from Vitis HLS User Guide UG1399 v2025.2 — Chapter 1: Design Principles, Pages 24–38.*

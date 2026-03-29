@@ -147,4 +147,24 @@ Lexicographic order on vectors, returning `bool`:
 
 ---
 
+## Best Practices
+
+| Practice | Rationale |
+|---|---|
+| **Use power-of-2 for both element bit-width and vector size `N`** | Ensures optimal memory alignment and maximum hardware efficiency |
+| **Prefer `hls::vector` over manual loop unrolling for SIMD** | The compiler maps vector operations to parallel hardware automatically; cleaner code, same result |
+| **Use `reduce()` for sum/min/max reductions** | Generates a balanced tree of operations rather than a sequential chain |
+| **Compile with C++14 or later** | `hls::vector` requires C++14; set `syn.compile.cflags=-std=c++14` |
+| **Combine vectors with `hls::stream` for throughput** | Streaming vector words through a dataflow pipeline achieves maximum bandwidth |
+
+---
+
+### See Also
+
+- [Chapter 6 — Data Types (Vector Data Types)](../section2_hls_programmers_guide/ch06_data_types.md#10-vector-data-types) — Overview and usage context
+- [Chapter 4 — Arrays Primer](../section2_hls_programmers_guide/ch04_arrays_primer.md) — Array partitioning for parallel access
+- [Chapter 24 — HLS Stream Library](ch24_hls_stream_library.md) — Streaming vector data between tasks
+
+---
+
 *Source: Vitis HLS User Guide UG1399 v2025.2, Chapter 27, pages 818–820*

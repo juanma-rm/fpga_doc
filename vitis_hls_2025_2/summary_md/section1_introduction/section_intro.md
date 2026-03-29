@@ -4,6 +4,7 @@
 ---
 
 ## Table of Contents
+0. [Navigating Content by Design Process](#navigating-content-by-design-process)
 1. [What is High-Level Synthesis?](#1-what-is-high-level-synthesis)
 2. [Supported Operating Systems & Licensing](#2-supported-operating-systems--licensing)
 3. [Changed Behavior in v2025.2](#3-changed-behavior-in-v20252)
@@ -14,6 +15,16 @@
 8. [Re-Architecting the Hardware Module](#8-re-architecting-the-hardware-module)
 9. [Best Practices](#9-best-practices)
 10. [Tutorials and Examples](#10-tutorials-and-examples)
+
+---
+
+## Navigating Content by Design Process
+
+AMD documentation is organized around standard design processes accessible via the **Design Hubs** page and the **Design Flow Assistant**. This document covers the following design processes:
+
+| Design Process | Topics in This Document |
+|---|---|
+| **Hardware, IP, and Platform Development** | Launching the Vitis Unified IDE, Running C Simulation, Running C Synthesis, Running C/RTL Co-Simulation |
 
 ---
 
@@ -424,6 +435,14 @@ void store(hls::stream<vecOf16Words>& in, vecOf16Words* out, int size) {
 | **Vitis HLS Introductory Examples** | `github.com/Xilinx/Vitis-HLS-Introductory-Examples` | Small code examples: design patterns, coding guidelines, optimization techniques. Each includes `README`, `hls_config.cfg`, `run_hls.tcl`. |
 | **Vitis Accel Examples Repository** | `github.com/Xilinx/Vitis_Accel_Examples` | Host + kernel programming examples for the Vitis acceleration flow. Kernel code is directly compilable as HLS components. |
 | **Vitis Application Acceleration Tutorials** | `github.com/Xilinx/Vitis-Tutorials` | Step-by-step tutorials covering tool flow and application development, including using the Vitis unified IDE for bottom-up HLS component design. |
+
+---
+
+### See Also
+
+- [Chapter 1 — Design Principles](../section2_hls_programmers_guide/ch01_design_principles.md) — Core HLS design guidelines
+- [Chapter 12 — Launching Vitis IDE](../section3_vitis_hls_flow_steps/ch12_launching_vitis_ide.md) — Getting started with IDE flow
+- [Appendix C — Resources](../appendices/appendix_c_resources.md) — External documentation links
 
 ---
 

@@ -15,6 +15,7 @@ This chapter provides a comprehensive reference for the Vitis v++ compiler comma
 | 3 | [v++ Compilation Options](#v-compilation-options) | Compile-time options |
 | 4 | [v++ Mode AIE](#v-mode-aie) | AI Engine compilation mode |
 | 5 | [v++ Mode HLS](#v-mode-hls) | HLS component compilation mode |
+| 5b | [v++ Mode VSS](#v-mode-vss) | Vitis Subsystem creation mode (link) |
 | 6 | [HLS Optimization Directives](#hls-optimization-directives) | Synthesis directives for HLS |
 | 7 | [HLS Pragmas](#hls-pragmas) | Source-code pragma reference |
 | 8 | [v++ Linking and Packaging Options](#v-linking-and-packaging-options) | --advanced, --clock, --connectivity, --debug, --drc, --linkhook, --package, --profile, --vivado |
@@ -114,6 +115,19 @@ These options apply across compilation, linking, and packaging steps.
 | `--user_ip_repo_paths <paths>` | Add custom IP repository paths |
 | `--vivado.synth.jobs <n>` | Jobs for Vivado synthesis |
 | `--vivado.impl.jobs <n>` | Jobs for Vivado implementation |
+| `--board_connection` | Specify DIMM board file per connector slot (`<connector>:<vbnv>`) (Link) |
+| `--export_archive` | Generate a Vitis Metadata Archive (`.vma`) instead of `.xclbin` for Vivado import (Link) |
+| `--export_script` | Export build scripts for customization; use with `--custom_script` to resubmit (Compile, Link, Package) |
+| `--custom_script <kernel>:<tcl>` | Use a custom Tcl script for kernel compilation or a `run_script_map.dat` for link (Compile, Link) |
+| `--from_step <step>` | Resume build from a named step (requires prior `--to_step` in same project dir) (Compile, Link, Package) |
+| `--to_step <step>` | Stop build at a named step; resume later with `--from_step` (Compile, Link, Package) |
+| `--list_steps` | List valid step names for `--from_step`/`--to_step` (requires `--target`) (Compile, Link, Package) |
+| `--interactive impl` | Launch Vivado interactively after synthesis for manual place-and-route (Link) |
+| `--reuse_impl <dcp>` | Reuse an implemented DCP file to generate xclbin without re-running implementation (Link) |
+| `--reuse_bit <bit>` | Reuse a generated bitstream file to generate xclbin without re-running implementation (Link) |
+| `--kernel_frequency <id:freq[\|id:freq]>` | Override platform clock frequencies per clock ID (e.g., `0:300\|1:500`). Supports Hz, KHz, MHz (Compile, Link) |
+| `--report_dir <dir>` | Directory for report files (default: `_x/reports`) (Compile, Link, Package) |
+| `--user_board_repo_paths <path>` | User board repository for DIMM board files; prepended to Vivado `board_part_repo_paths` (Link) |
 
 ### Build Targets
 
@@ -316,6 +330,34 @@ Specified under the `[hls]` section in the config file:
 | Command | Description |
 |---------|-------------|
 | `syn.directive.unroll` | Unroll loops by a specified factor |
+
+---
+
+## v++ Mode VSS
+
+Use `v++ -l --mode vss` to create a **Vitis Subsystem (VSS)** artifact. A VSS is a platform-independent, reusable design component that packages AI Engine graphs, PL kernels, and optionally PS domains into a subsystem intended for later integration into a larger system.
+
+### Syntax
+
+```bash
+v++ --link --mode vss --save-temps --part <part_name> --config <config_file>
+```
+
+### Key Characteristics
+
+- **Platform-independent**: The VSS does not target a specific platform; it is integrated later.
+- **Reusable**: Designed to be instantiated and linked within a system context on a target platform.
+- **No bitstream output**: This flow does not produce a deployable hardware bitstream; it generates a subsystem package with metadata and binaries.
+
+### Mode Option
+
+```
+--mode (-m):
+  [aie|hls]  Must be used with --compile/-c option.
+  [vss]      Must be used with --link/-l option.
+```
+
+> See *Linking a VSS Component* in the *Embedded Design Development Using Vitis (UG1701)* for full details.
 
 ---
 
@@ -767,6 +809,52 @@ HLS pragmas are equivalent to the config-file directives above, placed directly 
 | **Top-level** | `top` |
 | **Latency** | `latency` |
 
+### Representative Pragma Examples
+
+```c
+// Pipeline a loop with target II=1
+for (int i = 0; i < N; i++) {
+    #pragma HLS pipeline II=1
+    out[i] = in[i] * coeff;
+}
+
+// Partition an array for parallel access
+#pragma HLS array_partition variable=buf type=cyclic factor=4 dim=1
+
+// Set AXI4 master interface with burst configuration
+#pragma HLS interface m_axi port=data offset=slave bundle=gmem \
+    max_read_burst_length=64 max_write_burst_length=64 \
+    num_read_outstanding=4 num_write_outstanding=4
+
+// AXI4-Lite control interface for scalar arguments
+#pragma HLS interface s_axilite port=size bundle=control
+#pragma HLS interface s_axilite port=return bundle=control
+
+// Enable dataflow optimization
+void top_func(hls::stream<int>& in, hls::stream<int>& out) {
+    #pragma HLS dataflow
+    stage1(in, tmp);
+    stage2(tmp, out);
+}
+
+// Bind operation to DSP
+#pragma HLS bind_op variable=result op=mul impl=dsp latency=3
+
+// Bind storage to URAM
+#pragma HLS bind_storage variable=lut type=rom_1p impl=uram
+
+// Loop tripcount for reporting (does not affect synthesis)
+#pragma HLS loop_tripcount min=1 max=1024 avg=512
+
+// Inline a function to remove hierarchy
+#pragma HLS inline
+
+// Unroll a loop fully
+#pragma HLS unroll
+```
+
+> **Note:** Pragmas and config-file directives (`syn.directive.*`) produce identical synthesis results. Use pragmas when you want directives stored in source code; use config-file directives for external, repo-managed optimization strategies.
+
 ---
 
 ## v++ Linking and Packaging Options
@@ -892,6 +980,19 @@ Connect a specific NoC instance.
 
 Specify read/write bandwidth for NoC connections.
 
+#### --connectivity.region
+
+Assign a compute unit to a PFM.REGION declared in the extensible `.xsa` hardware platform. Typically used to map CUs to Pblocks or SLRs on SSI devices (e.g., xcvp2802).
+
+```bash
+--connectivity.region <region_label>:<cu_name>
+```
+
+- `<region_label>` — String identifier from the platform's `PFM.REGION` attribute
+- `<cu_name>` — Compute unit name from `--connectivity.nk` (defaults to `<kernel_name>_1`)
+
+> **Recommended**: Specify region labels when working with SSI devices for greatest placement control. Unassigned CUs are automatically placed in available regions.
+
 #### --connectivity.slr
 
 Assign a compute unit to a specific SLR (Super Logic Region) on multi-die devices.
@@ -906,13 +1007,15 @@ Insert debug infrastructure into the design.
 
 | Option | Description |
 |--------|-------------|
-| `--debug.chipscope <cu_name>:<port>` | Add ILA (ChipScope) debug probe on port |
+| `--debug.chipscope <cu_name>[:<interface>]` | Add System ILA debug core to specified CU (requires `<cu_name>`, does not accept `all`) |
+| `--debug.aie.chipscope <interface\|adf_graph_arg>` | Enable hardware debug for Versal AI Engine through ChipScope on PLIO/AXIS interfaces |
 | `--debug.protocol <all\|<cu>:<interface>>` | Add AXI protocol checker |
 | `--debug.list_ports` | List available debug ports |
 
 **Example:**
 ```bash
 v++ --link --debug.chipscope vadd_1:m_axi_gmem
+v++ --link --debug.aie.chipscope mygraph.out
 v++ --link --debug.protocol all
 ```
 

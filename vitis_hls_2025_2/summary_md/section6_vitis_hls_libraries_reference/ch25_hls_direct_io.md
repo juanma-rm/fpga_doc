@@ -272,4 +272,24 @@ reset_myCounter >> reset;
 
 ---
 
+## Best Practices
+
+| Practice | Rationale |
+|---|---|
+| **Use `direct_io` only for continuously running (`ap_ctrl_none`) kernels** | Direct I/O models wire-level signaling; it is not suitable for start/stop kernels with control handshakes |
+| **Choose `ap_vld` for producer-driven updates, `ap_hs` for handshake-synchronized** | `ap_vld` is simplest when the consumer can tolerate stale data; `ap_hs` guarantees the consumer reads each value |
+| **Map `direct_io` ports to `s_axilite` for host-accessible dynamic parameters** | Allows runtime tuning (e.g., threshold, gain) without restarting the kernel |
+| **Use `hls::stream` (not `direct_io`) for data pipelines and dataflow regions** | Streams provide FIFO buffering and work inside dataflow; direct I/O does not |
+| **Keep `direct_io` at the top-level function interface only** | Internal use is not supported; use `hls::stream` for inter-task communication |
+
+---
+
+### See Also
+
+- [Chapter 24 — HLS Stream Library](ch24_hls_stream_library.md) — FIFO-based streaming alternative
+- [Chapter 28 — HLS Task Library](ch28_hls_task_library.md) — Data-driven tasks that pair well with direct I/O
+- [Chapter 8 — Interfaces](../section2_hls_programmers_guide/ch08_interfaces.md) — Interface protocols and block-level control
+
+---
+
 *Source: Vitis HLS User Guide UG1399 v2025.2, Chapter 25, pages 808–814*

@@ -199,4 +199,12 @@ By default, `stream_of_blocks` maps storage to 2-port block RAM (`RAM_2P`). Over
 
 ---
 
+### See Also
+
+- [Chapter 24 — HLS Stream Library](ch24_hls_stream_library.md) — Scalar-element `hls::stream` API
+- [Chapter 4 — Arrays Primer](../section2_hls_programmers_guide/ch04_arrays_primer.md) — Array partitioning and access patterns
+- [Chapter 2 — Abstract Parallel Programming](../section2_hls_programmers_guide/ch02_abstract_parallel_programming.md) — Dataflow with array channels
+
+---
+
 *Source: Vitis HLS User Guide UG1399 v2025.2, Chapter 30, pages 834–842*

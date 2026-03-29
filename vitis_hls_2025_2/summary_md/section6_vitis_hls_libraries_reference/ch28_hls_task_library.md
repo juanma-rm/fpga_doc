@@ -252,4 +252,12 @@ Vitis HLS automatically splits this into two internal dataflow regions:
 
 ---
 
+### See Also
+
+- [Chapter 2 — Abstract Parallel Programming](../section2_hls_programmers_guide/ch02_abstract_parallel_programming.md) — Control-driven vs data-driven TLP
+- [Chapter 24 — HLS Stream Library](ch24_hls_stream_library.md) — `hls::stream` API used with tasks
+- [Chapter 11 — Optimizing Techniques](../section2_hls_programmers_guide/ch11_optimizing_techniques.md) — Dataflow canonical coding, deadlock avoidance
+
+---
+
 *Source: Vitis HLS User Guide UG1399 v2025.2, Chapter 28, pages 821–828*

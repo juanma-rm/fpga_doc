@@ -60,9 +60,31 @@ The MicroBlaze compiler supports `-fPIC` and `-fpic` for PIC generation:
 - Uses Procedure Linkage Table (PLT) for shared library function calls
 - Used by Linux for shared libraries and relocatable executables
 
+## MicroBlaze Application Binary Interface
+
+The GNU compiler for MicroBlaze uses the Application Binary Interface (ABI) defined in the MicroBlaze Processor Reference Guide (UG081). Refer to the ABI documentation for register and stack usage conventions and a description of the standard memory model used by the compiler.
+
 ## MicroBlaze Assembler
 
 `mb-as` supports all MicroBlaze instruction set opcodes except `imm` (auto-generated when needed).
+
+The `mb-as` assembler generates `imm` instructions when using large immediate values. You do not need to write code with `imm` instructions. All MicroBlaze instructions with an immediate operand must be specified as a constant or a label. If the instruction requires a PC-relative operand, `mb-as` computes it and includes an `imm` instruction if necessary.
+
+**Example — PC-relative operand:**
+
+```asm
+beqi r3, mytargetlabel
+```
+
+The assembler computes the immediate value as `mytargetlabel - PC`. If this value exceeds 16 bits, the assembler automatically inserts an `imm` instruction. If the value is not known at compile time, the assembler always inserts an `imm` instruction. Use the `-relax` linker option to remove unnecessary `imm` instructions.
+
+**Example — large constant operand:**
+
+```asm
+addi r4, r3, 200000
+```
+
+The assembler recognizes that this operand needs an `imm` instruction and inserts one automatically.
 
 **Pseudo-opcodes:**
 
@@ -140,6 +162,41 @@ The MicroBlaze compiler supports `-fPIC` and `-fpic` for PIC generation:
 **Startup sources:** `<AMD_install>/Vitis/<version>/data/embeddedsw/lib/microblaze/src/`
 
 Use `-nostartfiles` to prevent default startup files, `-B <dir>` to specify custom CRT location.
+
+### Other Files (C++ CRT)
+
+The compiler also uses standard start and end files for C++ language support: `crti.o`, `crtbegin.o`, `crtend.o`, and `crtn.o`. These files provide content for the `.init`, `.fini`, `.ctors`, and `.dtors` sections.
+
+> These miscellaneous CRT files are not available in source code. They are provided in the installation to be used as-is.
+
+### Modifying Startup Files
+
+Initialization files are distributed in both precompiled and source form. Sources are in `<AMD_install>/Vitis/<version>/data/embeddedsw/lib/microblaze/src/`.
+
+To use custom startup files:
+1. Copy files from the source area and include them as part of your application source
+2. Alternatively, assemble them into `.o` files and place in a common area
+3. Use `-B <directory>` to refer to the newly created object files instead of the defaults
+4. Use `-nostartfiles` on the final compile line to prevent default startup files
+
+### Reducing Startup Code Size for C Programs
+
+Eliminate the overhead of invoking C++ constructor/destructor code in a C program that does not require it. This saves approximately **220 bytes** of code space:
+
+1. Copy the startup files (`crtn.s`, `xcrtinit.s`, and the appropriate CRT for your mode, e.g., `crt2.s`, `pg-crtinit.s`) from the installation source area
+2. Modify `pg-crtinit.s` to remove the constructor/destructor invocations:
+   ```asm
+   brlid r15, __init   /* Remove these lines */
+   nop
+   ```
+   and:
+   ```asm
+   brlid r15, __fini   /* Remove these lines */
+   nop
+   ```
+3. Compile the files into `.o` files and place them in a directory of your choice (or include in application sources)
+4. Add `-nostartfiles` to the compiler. Add `-B <directory>` if files are in a separate folder
+5. Compile your application
 
 ## Compiler Libraries
 

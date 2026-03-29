@@ -156,15 +156,23 @@ Open `vitis-comp.json` → expand domain → Board Support Package
 | **Drivers** | Assign device drivers per peripheral; set to `none` to remove |
 | **Build Settings** | Toolchain selection and extra configuration |
 
-#### Linux Domain Settings
+> You cannot change the OS choice on this page. The software platform creation step determines the OS type.
+
+#### Domain Overview Page
+
+**Standalone and FreeRTOS domains:** The overview page provides configuration options related to the QEMU emulation platform. These options are auto-populated with pre-defined installation file paths.
+
+**Linux domain:** The overview page includes additional configuration options:
 
 | Field | Description |
 |-------|-------------|
-| BIF File | Boot Image Format file (Browse or generate) |
-| Pre-Built Image Directory | Linux image files (boot components, kernel, rootfs) |
-| DTB File | System device tree binary (auto-populated from Pre-Built Image Dir) |
-| FAT32 Partition Directory | Additional FAT32 partition files |
-| Qemu Data | Boot components for emulation (auto-populated on build) |
+| BIF File | Boot Image Format file (Browse to select, or click beside Browse to generate) |
+| Pre-Built Image Directory | Directory containing Linux image files (boot components, kernel, rootfs) |
+| DTB File | System device tree binary for Linux booting (auto-populated from Pre-Built Image Dir) |
+| FAT32 Partition Directory | Additional files for FAT32 partition |
+| Qemu Data | Boot components for hardware emulation (auto-populated on build) |
+
+> For a fixed platform for embedded application, the Linux domain fields above do not apply.
 
 ---
 
@@ -286,14 +294,52 @@ sysroot_toolchain=<TOOLCHAIN_PATH>
 
 All build settings are in `UserConfig.cmake` (supports both GUI and text editor views via `</>` button).
 
-| Setting | Location in UserConfig.cmake | Description |
-|---------|------------------------------|-------------|
-| **Sources** | Compiler Settings → Sources | Add/remove source files |
-| **Symbols** | Compiler Settings → Symbols | Add `#define` / `#undef` symbols |
-| **Libraries** | Compiler Settings → Libraries | Library names and paths for the linker |
-| **Linker Settings** | Compiler Settings → Linker Settings | Enable/disable linker flags |
-| **Optimization** | Compiler Settings → Optimization | `-O` level and debug flags |
-| **Miscellaneous** | Compiler Settings → Miscellaneous | Verbose, ANSI support, other flags |
+#### Manage Source Code
+
+1. Click your application component in Component view → expand **Settings** → open `UserConfig.cmake` (or hover over the component and click the settings button)
+2. Under **Compiler Settings**, select **Sources**
+3. Click **Add Item** to add source code; hover over a source file name and select to remove it
+
+#### Adding Symbols or Definitions
+
+1. Open `UserConfig.cmake` under Settings directory
+2. Under **Compiler Settings**, select **Symbols**
+3. Click **Add Item** to add defined or undefined symbols
+
+#### Adding Libraries and Library Paths
+
+1. Open `UserConfig.cmake` under Settings directory
+2. Under **Compiler Settings**, select **Libraries**
+3. Click **Add Item** to add the library name or library path
+
+#### Specifying the Linker Options
+
+1. Open `UserConfig.cmake` under Settings directory
+2. Under **Compiler Settings**, select **Linker Settings**
+3. Click the check-box to enable or disable linker flags
+
+#### Specifying Debug and Optimization Compiler Flags
+
+1. Open `UserConfig.cmake` under Settings directory
+2. Under **Compiler Settings**, select **Optimization**
+3. Select the optimization level from the drop-down. The **Debugging** section is under Optimization — click the drop-down to change the debug level. Input other optimization or debug flags in the **Other Flags** field.
+
+#### Specifying Miscellaneous Compiler Flags
+
+1. Open `UserConfig.cmake` under Settings directory
+2. Under **Compiler Settings**, select **Miscellaneous**
+3. Enable **Verbose** or **Support ANSI** program support via checkbox. Input other flags in the **Other Flags** field.
+
+> `UserConfig.cmake` supports GUI format and text format. Click the `</>` icons to access the source editor to view and modify settings in text format.
+
+| Setting | Location in UserConfig.cmake |
+|---------|------------------------------|
+| **Sources** | Compiler Settings → Sources |
+| **Symbols** | Compiler Settings → Symbols |
+| **Libraries** | Compiler Settings → Libraries |
+| **Linker Settings** | Compiler Settings → Linker Settings |
+| **Optimization** | Compiler Settings → Optimization |
+| **Miscellaneous** | Compiler Settings → Miscellaneous |
 
 **Build process:**
 1. Vitis builds the BSP (platform)
@@ -353,7 +399,9 @@ Output files appear in the output directory under the application component.
 
 Build via Flow Navigator. Linker settings do not apply to library components.
 
-**Using custom libraries in application projects:** Configure in `UserConfig.cmake` → Libraries.
+### Using Custom Libraries in Application Projects
+
+You can configure custom libraries to be linked with your application by setting the parameters in the `UserConfig.cmake` file. For more information, refer to [Adding Libraries and Library Paths](#adding-libraries-and-library-paths).
 
 ---
 

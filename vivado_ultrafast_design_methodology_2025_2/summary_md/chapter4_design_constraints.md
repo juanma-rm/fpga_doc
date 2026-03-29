@@ -259,6 +259,23 @@ set_external_delay ...  # Specify board delay for feedback compensation
 
 Failure to set this makes I/O timing analysis irrelevant and can prevent timing closure.
 
+**Clock Latency at the Source:**
+
+Model the latency of a clock at its source using `set_clock_latency -source`:
+
+```tcl
+# Specify clock source propagation delay outside the device
+set_clock_latency -source -early 0.2 [get_clocks clk]
+set_clock_latency -source -late 0.5 [get_clocks clk]
+```
+
+Use cases:
+
+- Specify clock delay propagation outside the device independently from input/output delay constraints
+- Model internal propagation latency during **out-of-context compilation** where the complete clock tree is not described
+
+> ⚠️ This constraint should only be used by advanced users — providing valid latency values is difficult.
+
 ### Step 2: Constraining Input and Output Ports
 
 #### Input Delay
@@ -329,7 +346,11 @@ set_min_delay -from [get_ports din] -to [get_ports dout] 2
 
 #### Source Synchronous Interfaces
 
-Use Vivado XDC templates: **Tools → Language Templates → XDC → Timing Constraints → Input Delay Constraints → Source Synchronous**.
+For source synchronous interfaces, AMD recommends using the I/O constraint templates provided by the Vivado Design Suite. Navigate to: **Tools → Language Templates → XDC → Timing Constraints → Input Delay Constraints → Source Synchronous**.
+
+The templates are based on default timing analysis path requirements. The syntax is simpler, but delay values must be adjusted to account for setup analysis being performed with different launch and capture edges (1-cycle or 1/2-cycle) instead of same edge (0-cycle). Timing reports may be more difficult to read as clock edges do not directly correspond to active hardware edges.
+
+> **Note:** The source-synchronous forwarded clock can also be used in input and output delay constraints for a system synchronous interface.
 
 ### Step 3: Defining Clock Groups and CDC Constraints
 

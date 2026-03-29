@@ -348,4 +348,12 @@ ap_int<32> la0[10000000], la1[10000000];  // ~80 MB on stack — may fail
 
 ---
 
+### See Also
+
+- [Chapter 3 — Loops Primer](ch03_loops_primer.md) — Loop pipelining that drives port contention on arrays
+- [Chapter 8 — Interfaces](ch08_interfaces.md) — Arrays on the interface (m_axi, BRAM ports)
+- [Chapter 17 — HLS Pragmas](../section4_vitis_hls_command_reference/ch17_hls_pragmas.md) — `ARRAY_PARTITION`, `ARRAY_RESHAPE`, `BIND_STORAGE` pragma reference
+
+---
+
 *Summary generated from Vitis HLS User Guide UG1399 v2025.2 — Chapter 4: Arrays Primer, Pages 85–99.*

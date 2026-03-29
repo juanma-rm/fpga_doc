@@ -233,7 +233,11 @@ Access: Left panel icon, **View → Examples**, or **Ctrl+Shift+R**
 
 ## Issue and Source Code Cross-Probing
 
-**Ctrl+Click** on an issue in the output console to jump to source code. The **Problem View** aggregates all warning/error messages with clickable navigation.
+**Ctrl+Click** on an issue in the output console to jump to source code.
+
+### Problem View
+
+The output channel displays all warning and error messages. You can quickly navigate to the source of the error or warning in the Problem pane by clicking the error or warning message.
 
 ---
 
@@ -242,6 +246,40 @@ Access: Left panel icon, **View → Examples**, or **Ctrl+Shift+R**
 Non-blocking builds allow multiple concurrent builds.
 
 > Disabled by default. Enable via: **File → Preferences → Open Settings (UI) → Vitis → Build → Parallel Build → Disable** (uncheck)
+
+> Expect a slower response if you launch multiple build or emulation jobs at the same time on a slow server.
+
+---
+
+## Notification for File Change
+
+When you modify files, the yellow indicator beside the build status icon prompts you to review and rebuild the component if necessary.
+
+---
+
+## New Feature Preview
+
+New features are available for you to explore in advance. View new features by clicking **Vitis → New Feature Preview**. Before using a new feature, you must enable it.
+
+**Disclaimer:** Preview features are currently in an early access phase. By using these features, you acknowledge and accept the following:
+
+- **Limited functionality:** Early access features can have limited functionality compared to fully released features. They can lack functions, have bugs, or experience performance issues.
+- **Potential instability:** Early access features are still being tested and refined. They are prone to crashes, errors, or unexpected behavior. Use with caution.
+- **Feedback and improvements:** Your feedback is crucial. AMD encourages you to report any issues, bugs, or suggestions encountered while using these features.
+- **No guarantees:** Early access features are provided on an "as-is" basis, without any warranties or guarantees. AMD reserves the right to modify, suspend, or discontinue these features without prior notice.
+- **Use at your own risk:** AMD is not to be held liable for any damages, losses, or inconveniences arising from the use of these features.
+
+---
+
+## Relative Path Support
+
+If imported files share the same initial node in the path as the workspace, the Vitis tool automatically selects the relative path:
+
+- **File Path:** `/local/drive/source/app.cpp`
+- **Workspace Path:** `/local/drive/workspace`
+- **Resolved as:** `$COMPONENT_LOCATION/../../sources/app.cpp`
+
+> When moving the workspace or committing to source control, remember to keep the relative path relationship.
 
 ---
 

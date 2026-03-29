@@ -129,3 +129,27 @@ vitis -w /path/to/my_workspace
 |---|---|
 | Installation guide | UG1701 — Embedded Design Development Using Vitis |
 | This document | UG1399 — Vitis HLS User Guide v2025.2 |
+
+---
+
+## Best Practices
+
+| Practice | Rationale |
+|---|---|
+| **Always source `settings64.sh` before launching** | Environment variables and PATH must be set for `vitis` and all downstream tools |
+| **Use workspaces to organize projects** | Each workspace can contain multiple HLS components; keeps builds isolated |
+| **Follow Flow Navigator step order (Sim → Synth → CoSim → Package → Impl)** | Each step depends on outputs of the previous; skipping steps leads to stale results |
+| **Re-run steps when the ⚠ warning icon appears** | Source changes invalidate downstream results; the IDE tracks dependencies automatically |
+| **Use the Console/Terminal area to diagnose build failures** | Build transcripts contain detailed error messages from `v++` and `vitis-run` |
+
+---
+
+### See Also
+
+- [Chapter 13 — Building and Running an HLS Component](ch13_building_hls_component.md) — Detailed steps for each Flow Navigator stage
+- [Chapter 14 — HLS Command Line](ch14_hls_command_line.md) — Command-line equivalents of all IDE operations
+- [Chapter 15 — Vitis Commands](../section4_vitis_hls_command_reference/ch15_vitis_commands.md) — `vitis`, `v++`, `vitis-run` reference
+
+---
+
+*Source: Vitis HLS User Guide UG1399 v2025.2, Chapter 12: Launching the Vitis Unified IDE, Pages 331–335.*

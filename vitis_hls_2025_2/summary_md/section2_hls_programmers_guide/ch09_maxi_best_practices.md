@@ -226,4 +226,12 @@ $$8 \text{ bytes/word} \times 32 \times 64 = 16{,}384 \text{ bytes} = 16\text{ K
 
 ---
 
+### See Also
+
+- [Chapter 8 — Interfaces](ch08_interfaces.md) — M_AXI interface details, burst inference, offset modes
+- [Chapter 11 — Optimizing Techniques](ch11_optimizing_techniques.md) — AXI system performance optimization
+- [Chapter 17 — HLS Pragmas](../section4_vitis_hls_command_reference/ch17_hls_pragmas.md) — `INTERFACE`, `CACHE`, `ALIAS` pragma reference
+
+---
+
 *Source: Vitis HLS User Guide UG1399 v2025.2, Chapter 9: Best Practices for Designing with M_AXI Interfaces, Pages 257–259.*

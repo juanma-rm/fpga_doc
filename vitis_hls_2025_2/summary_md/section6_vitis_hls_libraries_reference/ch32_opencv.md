@@ -40,4 +40,11 @@ This covers building OpenCV from source with the appropriate flags for HLS test 
 
 ---
 
+### See Also
+
+- [Chapter 35 — Deprecated Features](../section7_vitis_hls_migration_guide/ch35_deprecated_unsupported.md) — HLS Video Library deprecation notice
+- [Appendix C — Resources](../appendices/appendix_c_resources.md) — Vitis Libraries (successor to HLS OpenCV)
+
+---
+
 *Source: Vitis HLS User Guide UG1399 v2025.2, Chapter 32, page 871*

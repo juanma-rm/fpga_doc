@@ -45,6 +45,8 @@ The `launch.json` file contains all launch configurations. Default configuration
 | **Bitstream File** | Path to .bit file |
 | **Board Initialization** | FSBL or Tcl initialization |
 | **FSBL File** | FSBL path for PS initialization |
+| **FSBL Exit Function** | Specify the FSBL exit function |
+| **Init With FSBL** | Use FSBL to initialize the PS |
 | **Reset Entire System** | System reset (single processor) |
 | **Reset APU / Reset RPU** | Reset specific processor clusters |
 | **Enable RPU Split Mode** | Independent RPU cores |
@@ -94,7 +96,7 @@ In Target Connection → **Advanced** → **Automatically discover devices on JT
 
 ```bash
 # On remote host
-source <Vitis_path>/settings64.sh  # or settings64.bat on Windows
+source <Vitis_path>/settings64.sh  # or settings64.bat (Windows) or settings64.csh
 hw_server -s TCP::3122             # Custom port example
 ```
 
@@ -118,6 +120,19 @@ hw_server -s TCP::3122             # Custom port example
 2. Open Debug Settings → create configuration
 3. Set target connection
 4. Click **Debug**
+
+### Debugging Standalone Application Component on QEMU
+
+> ⚠️ This feature is not yet supported by the Vitis Unified IDE. Use Classic Vitis IDE if this is a requirement. Refer to 2023.1 documentation for details.
+
+### Setting Conditional Breakpoints
+
+1. Right-click on the left margin before the line number
+2. Select **Add Conditional Breakpoint**
+3. Type any expression that evaluates to a Boolean and hit Enter
+
+To change a normal breakpoint to a conditional breakpoint:
+- Right-click an existing breakpoint → **Edit Breakpoint** → add the expression
 
 ### Debugging Linux Application Component
 
@@ -210,6 +225,10 @@ For debugging under the Xen hypervisor:
 
 > ⚠️ Available as early access feature in New Feature Preview.
 
+### OS Aware Debugging
+
+> ⚠️ The Vitis Unified IDE does not currently support this feature. Use the Classic Vitis IDE if this is a requirement. Refer to the 2023.1 documentation for details.
+
 ---
 
 ## PS Trace
@@ -253,24 +272,47 @@ export OPENCSD_PATH=$INSTALL_PATH   # Set before launching Vitis
 
 ### Memory Inspector
 
-- **View memory:** Click Memory Inspector (top-right) → **+** → set address, offset, length → **Go**
-- **Compare addresses:** Create two inspectors → click **Toggle Comparison Widget** → **Go**
-- **Freeze memory:** Click lock icon for a persistent snapshot
+#### Viewing the Value of a Certain Memory Address
+
+1. After the debug session starts, click **Memory Inspector** (top-right corner)
+2. Click **+** to add a new memory view
+3. Set the memory address, offset, and length → click **Go**
+
+#### Comparing the Memory Value of Two Addresses
+
+1. Create two memory inspectors (see above)
+2. Click **Toggle Comparison Widget Visibility** to compare the difference
+3. Select the memory you want to compare and click **Go**
+
+#### Freezing Memory Value
+
+Keeps a snapshot of the memory contents until the Vitis tool closes. Useful for comparing stored values or debugging issues.
+
+1. Create a new memory inspector (see above)
+2. Click the **lock icon** to freeze the memory view
 
 ### Export Memory
 
 During debug: Memory Inspector → **Export Memory** icon → specify start/end address and output file path (S-record format).
 
-### Register Inspector
+### Viewing Registers
 
-- View from **View → Register Inspector** after debug session starts
-- Displays general purpose, system, IP, and co-processor registers
+The Register Inspector lists all registers (general purpose, system, IP, and co-processor). For Zynq devices, it displays processor and co-processor registers when Cortex-A9 targets are selected; system/IOU registers when APU target is selected.
+
+- Open via **View → Register Inspector** after debug session starts
 - Editable field values during debug
-- **Export:** Click **Export Registers** → select registers/groups → specify output location
+- Click register name to view detailed information
 
-### Virtual UART Terminal
+### Exporting Registers
 
-Right-click MicroBlaze/MicroBlaze V core → **TCF Debug Virtual Terminal**
+1. Start the debug session and open the Register Inspector view
+2. Click the **Export Registers** button
+3. Select registers/groups to export and specify output location
+4. Click **OK** to dump registers to the specified file
+
+### Using Virtual UART Terminal
+
+TCF Virtual UART terminal provides MDM terminal support. Right-click the MicroBlaze or MicroBlaze V core → **TCF Debug Virtual Terminal**.
 
 ### Disassembly View
 
@@ -290,17 +332,130 @@ The **Embedded Cross-Triggering (ECT)** module enables SoC subsystems to exchang
 
 ### CTI Ports by Device Family
 
-**Zynq:** 4 channels, 4 CTIs (ETB/TPIU, FTM, CPU0, CPU1), 1 CTM
+#### Zynq Devices
 
-| CTI | Key Trigger Inputs | Key Trigger Outputs |
-|-----|-------------------|-------------------|
-| ETB/TPIU | ETB full, ETB acq complete, ITM trigger | ETB/TPIU flush, trigger |
-| FTM | FTM trigger (×4) | FTM trigger (×4) |
-| CPU0/1 | DBGACK, PMU IRQ, PTM EXT, COMMTX | CPU debug request, PTM EXT, restart request |
+4 broadcast channels, 4 CTIs (ETB/TPIU, FTM, CPU0, CPU1), 1 CTM.
 
-**Zynq UltraScale+ MPSoC:** 4 channels, 9 CTIs (3 soc_debug, 2 RPU, 4 APU), 1 CTM
+**Table 9: CTI Trigger Ports in Zynq Devices** (hard-wired connections)
 
-**Versal:** 4 channels, 12 CTIs (2 RPU, 4 APU, PMC, soc_debug_lpd, APU ATM, soc_debug_fpd ×3, ATM)
+| CTI | Trigger Port | Signal |
+|-----|-------------|--------|
+| **ETB/TPIU CTI** | IN 2 | ETB full |
+| | IN 3 | ETB acquisition complete |
+| | IN 4 | ITM trigger |
+| | OUT 0 | ETB flush |
+| | OUT 1 | ETB trigger |
+| | OUT 2 | TPIU flush |
+| | OUT 3 | TPIU trigger |
+| **FTM CTI** | IN 0–3 | FTM trigger (×4) |
+| | OUT 0–3 | FTM trigger (×4) |
+| **CPU0/1 CTIs** | IN 0 | CPU DBGACK |
+| | IN 1 | CPU PMU IRQ |
+| | IN 2–3 | PTM EXT |
+| | IN 4–5 | CPU COMMTX |
+| | IN 6 | PTM TRIGGER |
+| | OUT 0 | CPU debug request |
+| | OUT 1–4 | PTM EXT |
+| | OUT 7 | CPU restart request |
+
+#### Zynq UltraScale+ MPSoC
+
+4 broadcast channels, 9 CTIs, 1 CTM. See UG1085 for details.
+
+**Table 10: CTI Trigger Ports in Zynq UltraScale+ MPSoCs** (hard-wired connections)
+
+| CTI | Trigger Port | Signal |
+|-----|-------------|--------|
+| **CTI 0 (soc_debug_fpd)** | IN 0–1 | ETF 1 FULL / ACQCOMP |
+| | IN 2–3 | ETF 2 FULL / ACQCOMP |
+| | IN 4–5 | ETR FULL / ACQCOMP |
+| | OUT 0–1 | ETF 1 FLUSHIN / TRIGIN |
+| | OUT 2–3 | ETF 2 FLUSHIN / TRIGIN |
+| | OUT 4–5 | ETR FLUSHIN / TRIGIN |
+| | OUT 6–7 | TPIU FLUSHIN / TRIGIN |
+| **CTI 1 (soc_debug_fpd)** | IN 0–3 | FTM (×4) |
+| | IN 4 | STM TRIGOUTSPTE |
+| | IN 5 | STM TRIGOUTSW |
+| | IN 6 | STM TRIGOUTHETE |
+| | IN 7 | STM ASYNCOUT |
+| | OUT 0–3 | FTM (×4) |
+| | OUT 4–5 | STM HWEVENTS |
+| | OUT 7 | HALT SYSTEM TIMER |
+| **CTI 2 (soc_debug_fpd)** | IN 0–1 | ATM 0 / ATM 1 |
+| | OUT 0–1 | ATM 0 / ATM 1 |
+| | OUT 7 | picture debug start |
+| **CTI 0, 1 (RPU)** | IN 0 | DBGTRIGGER |
+| | IN 1 | PMUIRQ |
+| | IN 2–3 | ETMEXTOUT[0–1] |
+| | IN 4–5 | COMMRX / COMMTX |
+| | IN 6 | ETM TRIGGER |
+| | OUT 0 | EDBGRQ |
+| | OUT 1–2 | ETMEXTIN[0–1] |
+| | OUT 7 | DBGRESTART |
+| **CTI 0, 1, 2, 3 (APU)** | IN 0 | DBGTRIGGER |
+| | IN 1 | PMUIRQ |
+| | IN 4–7 | ETMEXTOUT[0–3] |
+| | OUT 0 | EDBGRQ |
+| | OUT 1 | DBGRESTART |
+| | OUT 2 | CTIIRQ |
+| | OUT 4–7 | ETMEXTIN[0–3] |
+
+#### Versal Devices
+
+4 broadcast channels, 12 CTIs, 1 CTM. See AM011 for details.
+
+**Table 11: CTI Trigger Ports in Versal Devices** (hard-wired connections)
+
+| CTI | Trigger Port | Signal |
+|-----|-------------|--------|
+| **R5 CTI 0, 1 (RPU)** — XSDB IDs: 0–7 (R5 #0), 8–15 (R5 #1) |||
+| | IN 0 | R5 DBGTRIGGER |
+| | IN 1 | R5 PMUIRQ |
+| | IN 2–3 | ETM EXTOUT[0–1] |
+| | IN 4–5 | R5 COMMRX / COMMTX |
+| | IN 6 | ETM TRIGGER |
+| | OUT 0 | R5 EDBGRQ |
+| | OUT 1–2 | ETM EXTIN[0–1] |
+| | OUT 7 | R5 DBGRESTART |
+| **CTI 0, 1, 2, 3 (APU)** — XSDB IDs: 16–23 (A72 #0), 24–31 (#1), 32–39 (#2), 40–47 (#3) |||
+| | IN 0 | A72 DBGTRIGGER |
+| | IN 1 | A72 PMUIRQ |
+| | IN 4–7 | ETM EXTOUT[0–3] |
+| | OUT 0 | A72 EDBGRQ |
+| | OUT 1 | A72 DBGRESTART |
+| | OUT 2 | GIC PPI 24 |
+| | OUT 4–7 | ETM EXTIN[0–3] |
+| **CTI p (pmc_debug)** — XSDB IDs: 48–55 |||
+| | IN 0 | ATM TRIGOUT[0] |
+| | OUT 0 | ATM TRIGIN[0] |
+| **CTI 0d (soc_debug_lpd)** — XSDB IDs: 56–63 |||
+| | IN 0–4 | ATM0 TRIGOUT[0–4] |
+| | OUT 0–4 | ATM0 TRIGIN[0–4] |
+| **CTI 1a (APU ATM)** — XSDB IDs: 64–71 |||
+| | IN 0–1 | ELA 1a CTTRIGOUT[0–1] |
+| | IN 2–3 | ETF 1a FULL / ACQCOMP |
+| | OUT 0–1 | ELA 1a CTTRIGIN[0–1] |
+| | OUT 2–3 | ETF 1a FLUSHIN / TRIGIN |
+| | OUT 4–5 | PMUSNAPSHOT[0–1] |
+| **CTI 1b (soc_debug_fpd)** — XSDB IDs: 72–79 |||
+| | IN 0 | STM TRIGOUTSPTE |
+| | IN 1 | STM TRIGOUTSW |
+| | IN 2 | STM TRIGOUTHETE |
+| | IN 3 | STM ASYNCOUT |
+| | IN 4–5 | ETF 1 FULL / ACQCOMP |
+| | IN 6–7 | ETR FULL / ACQCOMP |
+| | OUT 0–1 | STM HWEVENTS |
+| | OUT 2–3 | TPIU FLUSHIN / TRIGIN |
+| | OUT 4–5 | ETF 1 FLUSHIN / TRIGIN |
+| | OUT 6–7 | ETR FLUSHIN / TRIGIN |
+| **CTI 1c (soc_debug_fpd)** — XSDB IDs: 80–87 |||
+| | IN 0–3 | pl_ps_trigger[0–3] |
+| | OUT 0–3 | ps_pl_trigger[0–3] |
+| | OUT 6 | HALT System Timer |
+| | OUT 7 | RESTART System Timer |
+| **CTI 1d (soc_debug_fpd)** — XSDB IDs: 88–95 |||
+| | IN 0–6 | ATM1 TRIGOUT[0–6] |
+| | OUT 0–6 | ATM1 TRIGIN[0–6] |
 
 ### Cross-Trigger Use Cases
 
@@ -357,6 +512,7 @@ Use XSDB command: `mbprofile` (or `mbprofile -help`)
 | gprof Profiling | ❌ Use Classic IDE (2024.2) |
 | FreeRTOS STM Analysis | ❌ Use Classic IDE (2024.2) |
 | QEMU debugging | ❌ Use Classic IDE (2024.2) |
+| OS Aware Debug | ❌ Use Classic IDE (2023.1) |
 | OS Aware Debug | ❌ Use Classic IDE (2023.1) |
 
 ---
@@ -435,17 +591,6 @@ Secure JTAG access requiring authentication before any operations (debug, progra
 2. Click **Create** → provide JTAG file path → generates decryption file
 3. File auto-populates in **Authenticated JTAG File** field
 4. Debug session uses file to open JTAG gate
-
----
-
-## Best Practices
-
-1. **Use FSBL initialization** for board setup rather than manual Tcl unless required
-2. **Enable Symbol Server** for remote debugging to ensure source code visibility
-3. **Set appropriate trace buffer size** for PS Trace — ring buffer overwrites on overflow
-4. **Use TCF profiling** (non-intrusive) before enabling stack trace (which slows execution)
-5. **Test target connections** before starting debug sessions
-6. **Use system projects** to debug multi-application scenarios simultaneously
 
 ---
 
