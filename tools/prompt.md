@@ -2,13 +2,16 @@
 
 ## Overview
 
-Convert a ug892-vivado-design-flows-overview-en-us-2025.2.pdf chapter into structured, cross-linked markdown documentation. Output should be comprehensive, internally consistent, and well-organized.
+Convert a PDF chapter into structured, cross-linked markdown documentation. Output should be comprehensive, internally consistent, and well-organized.
 
 ---
 
 ## Input
 
-**Chapter Number:** proceed with all chapters in fpga_doc\vivado_design_flows_2025_2\pdf_chapters, one by one, in order, one at a time.
+- **PDF Name:** `<PDF_FILENAME>`
+- **PDF Chapters Location:** `<PDF_CHAPTERS_DIR>`
+- **Output Location:** `<OUTPUT_DIR>`
+- **Chapter Number:** proceed with all chapters in the PDF chapters location, one by one, in order, one at a time.
 
 ---
 
@@ -26,8 +29,8 @@ Convert a ug892-vivado-design-flows-overview-en-us-2025.2.pdf chapter into struc
 
 ### File Format
 
-- **Name Convention:** same as pdf filename
-- **Location:** `fpga_doc/vivado_design_flows_2025_2/summary_md/`
+- **Name Convention:** same as PDF filename
+- **Location:** `<OUTPUT_DIR>`
 - **Format:** Markdown with proper heading hierarchy, tables, code blocks, links
 
 ### Document Structure
@@ -86,7 +89,6 @@ Convert a ug892-vivado-design-flows-overview-en-us-2025.2.pdf chapter into struc
 
 **Connectivity:**
 - Cross-references between related items (See Also sections)
-- Links to chapters 17–18 where applicable
 - Links are functional and use correct markdown syntax
 
 **Accuracy:**
@@ -105,9 +107,9 @@ Convert a ug892-vivado-design-flows-overview-en-us-2025.2.pdf chapter into struc
 
 - [ ] All items from chapter documented (count verified with TOC)
 - [ ] Each item has: Syntax, Options/Parameters, Behavior, Examples, See Also
-- [ ] Option tables include defaults (Vivado vs. Vitis flow noted if different)
+- [ ] Option tables include defaults
 - [ ] Examples are executable and correct
-- [ ] All cross-references use proper syntax: `[text](ch17_hls_pragmas.md#anchor)`
+- [ ] All cross-references use proper markdown link syntax
 - [ ] No absolute file paths or `file://` URIs
 - [ ] Tables render correctly in markdown preview
 - [ ] Heading hierarchy is consistent
@@ -117,3 +119,12 @@ Convert a ug892-vivado-design-flows-overview-en-us-2025.2.pdf chapter into struc
 ---
 
 ## Notes
+
+- Batch reading may be necessary for large chapters to manage token budget
+- Documentation should be created immediately after full chapter is read
+- Temp extraction files should be removed after markdown is complete
+
+---
+
+**Version:** 2.0  
+**Last Updated:** March 29, 2026
