@@ -1,4 +1,4 @@
-# Chapter 23 — HLS Math Library
+﻿# Chapter 23 — HLS Math Library
 
 > UG1399 (v2025.2) · Section VI: Vitis HLS Libraries Reference · Pages 785–795
 
@@ -267,7 +267,7 @@ extern "C" float sqrtf(float);
 
 ### See Also
 
-- [Chapter 6 — Data Types](../section2_hls_programmers_guide/ch06_data_types.md) — `half`, `ap_fixed`, floating-point types
+- [Chapter 6 — Data Types](../section02_hls_programmers_guide/ch06_data_types.md) — `half`, `ap_fixed`, floating-point types
 - [Chapter 31 — HLS IP Libraries](ch31_hls_ip_libraries.md) — DSP intrinsics and CORDIC
 - [Chapter 20 — Built-in Functions](ch20_builtin_functions.md) — Other built-in HLS functions
 

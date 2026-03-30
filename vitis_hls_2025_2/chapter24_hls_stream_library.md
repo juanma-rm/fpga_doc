@@ -1,4 +1,4 @@
-# Chapter 24 — HLS Stream Library
+﻿# Chapter 24 — HLS Stream Library
 
 > UG1399 (v2025.2) · Section VI: Vitis HLS Libraries Reference · Pages 796–807
 
@@ -398,7 +398,7 @@ Because stream variables do not appear in the GUI directives pane, right-click t
 
 ### See Also
 
-- [Chapter 2 — Abstract Parallel Programming](../section2_hls_programmers_guide/ch02_abstract_parallel_programming.md) — Dataflow channels and streaming
+- [Chapter 2 — Abstract Parallel Programming](../section02_hls_programmers_guide/ch02_abstract_parallel_programming.md) — Dataflow channels and streaming
 - [Chapter 28 — HLS Task Library](ch28_hls_task_library.md) — `hls::task` with stream connections
 - [Chapter 30 — Stream of Blocks](ch30_hls_stream_of_blocks.md) — Array-based dataflow via `hls::stream_of_blocks`
 - [Chapter 29 — HLS Split/Merge](ch29_hls_split_merge.md) — Round-robin stream split/merge

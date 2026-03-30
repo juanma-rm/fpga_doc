@@ -1,4 +1,4 @@
-# Appendix A — Tcl to Config File Command Map
+﻿# Appendix A — Tcl to Config File Command Map
 
 > UG1399 (v2025.2) · Pages 889–897
 
@@ -254,9 +254,9 @@ This appendix maps Vitis HLS Tcl commands (used in classic project scripts) to t
 
 ### See Also
 
-- [Chapter 16 — Config File Commands](../section4_vitis_hls_command_reference/ch16_config_file_commands.md) — Full config-file syntax reference
-- [Chapter 18 — HLS Tcl Commands](../section4_vitis_hls_command_reference/ch18_hls_tcl_commands.md) — Original Tcl command syntax
-- [Chapter 17 — HLS Pragmas](../section4_vitis_hls_command_reference/ch17_hls_pragmas.md) — Source-level pragma equivalents
+- [Chapter 16 — Config File Commands](../section04_vitis_hls_command_reference/ch16_config_file_commands.md) — Full config-file syntax reference
+- [Chapter 18 — HLS Tcl Commands](../section04_vitis_hls_command_reference/ch18_hls_tcl_commands.md) — Original Tcl command syntax
+- [Chapter 17 — HLS Pragmas](../section04_vitis_hls_command_reference/ch17_hls_pragmas.md) — Source-level pragma equivalents
 
 ---
 

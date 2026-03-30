@@ -16,86 +16,86 @@
 
 ## Chapter 1 - Introduction
 
-### [Chapter 1: Introduction](chapter1_introduction.md)
+### [Chapter 1: Introduction](chapter01_introduction.md)
 
-- [About the UltraFast Design Methodology](chapter1_introduction.md#about-the-ultrafast-design-methodology)
-- [Understanding UltraFast Design Methodology Concepts](chapter1_introduction.md#understanding-ultrafast-design-methodology-concepts)
-- [Using the Vivado Design Suite](chapter1_introduction.md#using-the-vivado-design-suite)
+- [About the UltraFast Design Methodology](chapter01_introduction.md#about-the-ultrafast-design-methodology)
+- [Understanding UltraFast Design Methodology Concepts](chapter01_introduction.md#understanding-ultrafast-design-methodology-concepts)
+- [Using the Vivado Design Suite](chapter01_introduction.md#using-the-vivado-design-suite)
 
 ---
 
 ## Chapter 2 - Board and Device Planning
 
-### [Chapter 2: Board and Device Planning](chapter2_board_and_device_planning.md)
+### [Chapter 2: Board and Device Planning](chapter02_board_and_device_planning.md)
 
-- [PCB Layout Recommendations](chapter2_board_and_device_planning.md#pcb-layout-recommendations)
-- [Device Power Aspects and System Dependencies](chapter2_board_and_device_planning.md#device-power-aspects-and-system-dependencies)
-- [Clock Resource Planning and Assignment](chapter2_board_and_device_planning.md#clock-resource-planning-and-assignment)
-- [I/O Planning Design Flows](chapter2_board_and_device_planning.md#io-planning-design-flows)
-- [Designing with SSI Devices](chapter2_board_and_device_planning.md#designing-with-ssi-devices)
-- [Designing with HBM Devices](chapter2_board_and_device_planning.md#designing-with-hbm-devices)
-- [Configuration](chapter2_board_and_device_planning.md#configuration)
+- [PCB Layout Recommendations](chapter02_board_and_device_planning.md#pcb-layout-recommendations)
+- [Device Power Aspects and System Dependencies](chapter02_board_and_device_planning.md#device-power-aspects-and-system-dependencies)
+- [Clock Resource Planning and Assignment](chapter02_board_and_device_planning.md#clock-resource-planning-and-assignment)
+- [I/O Planning Design Flows](chapter02_board_and_device_planning.md#io-planning-design-flows)
+- [Designing with SSI Devices](chapter02_board_and_device_planning.md#designing-with-ssi-devices)
+- [Designing with HBM Devices](chapter02_board_and_device_planning.md#designing-with-hbm-devices)
+- [Configuration](chapter02_board_and_device_planning.md#configuration)
 
 ---
 
 ## Chapter 3 - Design Creation with RTL
 
-### [Chapter 3: Design Creation with RTL](chapter3_design_creation_with_rtl.md)
+### [Chapter 3: Design Creation with RTL](chapter03_design_creation_with_rtl.md)
 
-- [Defining Good RTL Design Hierarchy](chapter3_design_creation_with_rtl.md#defining-good-rtl-design-hierarchy)
-- [Working with IP](chapter3_design_creation_with_rtl.md#working-with-ip)
-- [RTL Coding Guidelines](chapter3_design_creation_with_rtl.md#rtl-coding-guidelines)
-- [Coding Styles to Improve Maximum Frequency](chapter3_design_creation_with_rtl.md#coding-styles-to-improve-maximum-frequency)
-- [Coding Styles to Improve Power](chapter3_design_creation_with_rtl.md#coding-styles-to-improve-power)
-- [Running RTL DRCs](chapter3_design_creation_with_rtl.md#running-rtl-drcs)
-- [Clocking Guidelines](chapter3_design_creation_with_rtl.md#clocking-guidelines)
-- [Clock Domain Crossing](chapter3_design_creation_with_rtl.md#clock-domain-crossing)
+- [Defining Good RTL Design Hierarchy](chapter03_design_creation_with_rtl.md#defining-good-rtl-design-hierarchy)
+- [Working with IP](chapter03_design_creation_with_rtl.md#working-with-ip)
+- [RTL Coding Guidelines](chapter03_design_creation_with_rtl.md#rtl-coding-guidelines)
+- [Coding Styles to Improve Maximum Frequency](chapter03_design_creation_with_rtl.md#coding-styles-to-improve-maximum-frequency)
+- [Coding Styles to Improve Power](chapter03_design_creation_with_rtl.md#coding-styles-to-improve-power)
+- [Running RTL DRCs](chapter03_design_creation_with_rtl.md#running-rtl-drcs)
+- [Clocking Guidelines](chapter03_design_creation_with_rtl.md#clocking-guidelines)
+- [Clock Domain Crossing](chapter03_design_creation_with_rtl.md#clock-domain-crossing)
 
 ---
 
 ## Chapter 4 - Design Constraints
 
-### [Chapter 4: Design Constraints](chapter4_design_constraints.md)
+### [Chapter 4: Design Constraints](chapter04_design_constraints.md)
 
-- [Organizing the Design Constraints for Compilation](chapter4_design_constraints.md#organizing-the-design-constraints-for-compilation)
-- [Creating Synthesis Constraints](chapter4_design_constraints.md#creating-synthesis-constraints)
-- [Creating Implementation Constraints](chapter4_design_constraints.md#creating-implementation-constraints)
-- [Specifying Constraints for the Vitis Environment](chapter4_design_constraints.md#specifying-constraints-for-the-vitis-environment)
-- [Defining Timing Constraints](chapter4_design_constraints.md#defining-timing-constraints)
-- [Defining Power and Thermal Constraints](chapter4_design_constraints.md#defining-power-and-thermal-constraints)
-- [Defining Physical Constraints](chapter4_design_constraints.md#defining-physical-constraints)
+- [Organizing the Design Constraints for Compilation](chapter04_design_constraints.md#organizing-the-design-constraints-for-compilation)
+- [Creating Synthesis Constraints](chapter04_design_constraints.md#creating-synthesis-constraints)
+- [Creating Implementation Constraints](chapter04_design_constraints.md#creating-implementation-constraints)
+- [Specifying Constraints for the Vitis Environment](chapter04_design_constraints.md#specifying-constraints-for-the-vitis-environment)
+- [Defining Timing Constraints](chapter04_design_constraints.md#defining-timing-constraints)
+- [Defining Power and Thermal Constraints](chapter04_design_constraints.md#defining-power-and-thermal-constraints)
+- [Defining Physical Constraints](chapter04_design_constraints.md#defining-physical-constraints)
 
 ---
 
 ## Chapter 5 - Design Implementation
 
-### [Chapter 5: Design Implementation](chapter5_design_implementation.md)
+### [Chapter 5: Design Implementation](chapter05_design_implementation.md)
 
-- [Running Synthesis](chapter5_design_implementation.md#running-synthesis)
-- [Moving Past Synthesis](chapter5_design_implementation.md#moving-past-synthesis)
-- [Implementing the Design](chapter5_design_implementation.md#implementing-the-design)
-- [Using Incremental Implementation Flows](chapter5_design_implementation.md#using-incremental-implementation-flows)
-- [Implementation Steps](chapter5_design_implementation.md#implementation-steps)
+- [Running Synthesis](chapter05_design_implementation.md#running-synthesis)
+- [Moving Past Synthesis](chapter05_design_implementation.md#moving-past-synthesis)
+- [Implementing the Design](chapter05_design_implementation.md#implementing-the-design)
+- [Using Incremental Implementation Flows](chapter05_design_implementation.md#using-incremental-implementation-flows)
+- [Implementation Steps](chapter05_design_implementation.md#implementation-steps)
 
 ---
 
 ## Chapter 6 - Design Closure
 
-### [Chapter 6: Design Closure](chapter6_design_closure.md)
+### [Chapter 6: Design Closure](chapter06_design_closure.md)
 
-- [Timing Closure](chapter6_design_closure.md#timing-closure)
-- [Understanding Timing Closure Criteria](chapter6_design_closure.md#understanding-timing-closure-criteria)
-- [Baselining the Design](chapter6_design_closure.md#baselining-the-design)
-- [Analyzing and Resolving Timing Violations](chapter6_design_closure.md#analyzing-and-resolving-timing-violations)
-- [Reducing Clock Skew](chapter6_design_closure.md#reducing-clock-skew)
-- [Reducing Clock Uncertainty](chapter6_design_closure.md#reducing-clock-uncertainty)
-- [Applying Common Timing Closure Techniques](chapter6_design_closure.md#applying-common-timing-closure-techniques)
-- [Tuning the Compilation Flow](chapter6_design_closure.md#tuning-the-compilation-flow)
-- [SSI Technology Considerations](chapter6_design_closure.md#ssi-technology-considerations)
-- [Using Intelligent Design Runs](chapter6_design_closure.md#using-intelligent-design-runs)
-- [Power Closure](chapter6_design_closure.md#power-closure)
-- [DRC Closure](chapter6_design_closure.md#drc-closure)
-- [Configuration and Debug](chapter6_design_closure.md#configuration-and-debug)
+- [Timing Closure](chapter06_design_closure.md#timing-closure)
+- [Understanding Timing Closure Criteria](chapter06_design_closure.md#understanding-timing-closure-criteria)
+- [Baselining the Design](chapter06_design_closure.md#baselining-the-design)
+- [Analyzing and Resolving Timing Violations](chapter06_design_closure.md#analyzing-and-resolving-timing-violations)
+- [Reducing Clock Skew](chapter06_design_closure.md#reducing-clock-skew)
+- [Reducing Clock Uncertainty](chapter06_design_closure.md#reducing-clock-uncertainty)
+- [Applying Common Timing Closure Techniques](chapter06_design_closure.md#applying-common-timing-closure-techniques)
+- [Tuning the Compilation Flow](chapter06_design_closure.md#tuning-the-compilation-flow)
+- [SSI Technology Considerations](chapter06_design_closure.md#ssi-technology-considerations)
+- [Using Intelligent Design Runs](chapter06_design_closure.md#using-intelligent-design-runs)
+- [Power Closure](chapter06_design_closure.md#power-closure)
+- [DRC Closure](chapter06_design_closure.md#drc-closure)
+- [Configuration and Debug](chapter06_design_closure.md#configuration-and-debug)
 
 ---
 

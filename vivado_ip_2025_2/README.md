@@ -15,66 +15,66 @@
 
 ## Chapter 1 - IP-Centric Design Flow
 
-### [Chapter 1: IP-Centric Design Flow](chapter1_ip-centric_design_flow.md)
+### [Chapter 1: IP-Centric Design Flow](chapter01_ip-centric_design_flow.md)
 
-- [IP-Centric Design Flow Overview](chapter1_ip-centric_design_flow.md#ip-centric-design-flow-overview)
-- [Navigating Content by Design Process](chapter1_ip-centric_design_flow.md#navigating-content-by-design-process)
-- [IP Terminology](chapter1_ip-centric_design_flow.md#ip-terminology)
-- [IP Packager](chapter1_ip-centric_design_flow.md#ip-packager)
-- [IP Integrator](chapter1_ip-centric_design_flow.md#ip-integrator)
-- [Using Revision and Source Control](chapter1_ip-centric_design_flow.md#using-revision-and-source-control)
-- [Using Encryption](chapter1_ip-centric_design_flow.md#using-encryption)
+- [IP-Centric Design Flow Overview](chapter01_ip-centric_design_flow.md#ip-centric-design-flow-overview)
+- [Navigating Content by Design Process](chapter01_ip-centric_design_flow.md#navigating-content-by-design-process)
+- [IP Terminology](chapter01_ip-centric_design_flow.md#ip-terminology)
+- [IP Packager](chapter01_ip-centric_design_flow.md#ip-packager)
+- [IP Integrator](chapter01_ip-centric_design_flow.md#ip-integrator)
+- [Using Revision and Source Control](chapter01_ip-centric_design_flow.md#using-revision-and-source-control)
+- [Using Encryption](chapter01_ip-centric_design_flow.md#using-encryption)
 
 ---
 
 ## Chapter 2 - IP Basics
 
-### [Chapter 2: IP Basics](chapter2_ip_basics.md)
+### [Chapter 2: IP Basics](chapter02_ip_basics.md)
 
-- [Using IP Project Settings](chapter2_ip_basics.md#using-ip-project-settings)
-- [Using the IP Catalog](chapter2_ip_basics.md#using-the-ip-catalog)
-- [Creating an IP Customization](chapter2_ip_basics.md#creating-an-ip-customization)
-- [Instantiating an IP](chapter2_ip_basics.md#instantiating-an-ip)
-- [Designing with System Verilog](chapter2_ip_basics.md#designing-with-system-verilog)
-- [Understanding IP States Within a Project](chapter2_ip_basics.md#understanding-ip-states-within-a-project)
-- [Managing IP Constraints](chapter2_ip_basics.md#managing-ip-constraints)
-- [Setting the Target Clock Period](chapter2_ip_basics.md#setting-the-target-clock-period)
-- [Synthesis Options for IP](chapter2_ip_basics.md#synthesis-options-for-ip)
-- [Simulating IP](chapter2_ip_basics.md#simulating-ip)
-- [Upgrading IP](chapter2_ip_basics.md#upgrading-ip)
-- [Understanding Multi-Level IP](chapter2_ip_basics.md#understanding-multi-level-ip)
-- [Working with Debug IP](chapter2_ip_basics.md#working-with-debug-ip)
-- [Using a Core Container](chapter2_ip_basics.md#using-a-core-container)
+- [Using IP Project Settings](chapter02_ip_basics.md#using-ip-project-settings)
+- [Using the IP Catalog](chapter02_ip_basics.md#using-the-ip-catalog)
+- [Creating an IP Customization](chapter02_ip_basics.md#creating-an-ip-customization)
+- [Instantiating an IP](chapter02_ip_basics.md#instantiating-an-ip)
+- [Designing with System Verilog](chapter02_ip_basics.md#designing-with-system-verilog)
+- [Understanding IP States Within a Project](chapter02_ip_basics.md#understanding-ip-states-within-a-project)
+- [Managing IP Constraints](chapter02_ip_basics.md#managing-ip-constraints)
+- [Setting the Target Clock Period](chapter02_ip_basics.md#setting-the-target-clock-period)
+- [Synthesis Options for IP](chapter02_ip_basics.md#synthesis-options-for-ip)
+- [Simulating IP](chapter02_ip_basics.md#simulating-ip)
+- [Upgrading IP](chapter02_ip_basics.md#upgrading-ip)
+- [Understanding Multi-Level IP](chapter02_ip_basics.md#understanding-multi-level-ip)
+- [Working with Debug IP](chapter02_ip_basics.md#working-with-debug-ip)
+- [Using a Core Container](chapter02_ip_basics.md#using-a-core-container)
 
 ---
 
 ## Chapter 3 - Using Manage IP Projects
 
-### [Chapter 3: Using Manage IP Projects](chapter3_using_manage_ip_projects.md)
+### [Chapter 3: Using Manage IP Projects](chapter03_using_manage_ip_projects.md)
 
-- [Manage IP Flow](chapter3_using_manage_ip_projects.md#manage-ip-flow)
-- [Creating a Manage IP Project](chapter3_using_manage_ip_projects.md#creating-a-manage-ip-project)
-- [Customizing IP in the Manage IP Project](chapter3_using_manage_ip_projects.md#customizing-ip-in-the-manage-ip-project)
-- [Managing IP in the Manage IP Project](chapter3_using_manage_ip_projects.md#managing-ip-in-the-manage-ip-project)
+- [Manage IP Flow](chapter03_using_manage_ip_projects.md#manage-ip-flow)
+- [Creating a Manage IP Project](chapter03_using_manage_ip_projects.md#creating-a-manage-ip-project)
+- [Customizing IP in the Manage IP Project](chapter03_using_manage_ip_projects.md#customizing-ip-in-the-manage-ip-project)
+- [Managing IP in the Manage IP Project](chapter03_using_manage_ip_projects.md#managing-ip-in-the-manage-ip-project)
 
 ---
 
 ## Chapter 4 - Using IP in Non-Project Mode
 
-### [Chapter 4: Using IP in Non-Project Mode](chapter4_using_ip_in_non-project_mode.md)
+### [Chapter 4: Using IP in Non-Project Mode](chapter04_using_ip_in_non-project_mode.md)
 
-- [Third-Party Synthesis Flow](chapter4_using_ip_in_non-project_mode.md#third-party-synthesis-flow)
-- [Tcl Commands for Common IP Operations](chapter4_using_ip_in_non-project_mode.md#tcl-commands-for-common-ip-operations)
-- [Example IP Flow Commands](chapter4_using_ip_in_non-project_mode.md#example-ip-flow-commands)
+- [Third-Party Synthesis Flow](chapter04_using_ip_in_non-project_mode.md#third-party-synthesis-flow)
+- [Tcl Commands for Common IP Operations](chapter04_using_ip_in_non-project_mode.md#tcl-commands-for-common-ip-operations)
+- [Example IP Flow Commands](chapter04_using_ip_in_non-project_mode.md#example-ip-flow-commands)
 
 ---
 
 ## Chapter 5 - Using IP Subsystems with IP Integrator
 
-### [Chapter 5: Using IP Subsystems with IP Integrator](chapter5_using_ip_subsystems_with_ip_integrator.md)
+### [Chapter 5: Using IP Subsystems with IP Integrator](chapter05_using_ip_subsystems_with_ip_integrator.md)
 
-- [Referencing the IP Integrator Documentation](chapter5_using_ip_subsystems_with_ip_integrator.md#referencing-the-ip-integrator-documentation)
-- [Validating the Design](chapter5_using_ip_subsystems_with_ip_integrator.md#validating-the-design)
+- [Referencing the IP Integrator Documentation](chapter05_using_ip_subsystems_with_ip_integrator.md#referencing-the-ip-integrator-documentation)
+- [Validating the Design](chapter05_using_ip_subsystems_with_ip_integrator.md#validating-the-design)
 
 ---
 

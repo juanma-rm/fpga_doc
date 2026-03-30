@@ -1,4 +1,4 @@
-# Chapter 18 — HLS Tcl Commands
+﻿# Chapter 18 — HLS Tcl Commands
 
 > Source: *Vitis HLS User Guide* UG1399 v2025.2, Chapter 18 (pp. 608–712)
 
@@ -1035,7 +1035,7 @@ set_directive_unroll [-factor <int>] [-skip_exit_check] [-off] <location>
 - [Chapter 16 — Config File Commands](ch16_config_file_commands.md) — Modern config-file equivalents
 - [Chapter 17 — HLS Pragmas](ch17_hls_pragmas.md) — Source-level pragma equivalents
 - [Appendix A — Tcl to Config File Map](../appendices/appendix_a_tcl_config_map.md) — Complete cross-reference table
-- [Chapter 35 — Deprecated Features](../section7_vitis_hls_migration_guide/ch35_deprecated_unsupported.md) — Deprecated Tcl commands
+- [Chapter 35 — Deprecated Features](../section07_vitis_hls_migration_guide/ch35_deprecated_unsupported.md) — Deprecated Tcl commands
 
 ---
 

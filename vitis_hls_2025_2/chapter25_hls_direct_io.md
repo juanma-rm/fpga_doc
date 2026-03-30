@@ -1,4 +1,4 @@
-# Chapter 25 — HLS Direct I/O
+﻿# Chapter 25 — HLS Direct I/O
 
 > UG1399 (v2025.2) · Section VI: Vitis HLS Libraries Reference · Pages 808–814
 
@@ -288,7 +288,7 @@ reset_myCounter >> reset;
 
 - [Chapter 24 — HLS Stream Library](ch24_hls_stream_library.md) — FIFO-based streaming alternative
 - [Chapter 28 — HLS Task Library](ch28_hls_task_library.md) — Data-driven tasks that pair well with direct I/O
-- [Chapter 8 — Interfaces](../section2_hls_programmers_guide/ch08_interfaces.md) — Interface protocols and block-level control
+- [Chapter 8 — Interfaces](../section02_hls_programmers_guide/ch08_interfaces.md) — Interface protocols and block-level control
 
 ---
 

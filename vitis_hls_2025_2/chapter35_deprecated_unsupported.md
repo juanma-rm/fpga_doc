@@ -1,4 +1,4 @@
-# Chapter 35 — Deprecated and Unsupported Features
+﻿# Chapter 35 — Deprecated and Unsupported Features
 
 > UG1399 (v2025.2) · Section VII: Vitis HLS Migration Guide · Pages 882–886
 
@@ -137,7 +137,7 @@ hls/dsp/
 
 - [Chapter 36 — Unsupported Features](ch36_unsupported_features.md) — Completely removed features
 - [Chapter 34 — Migrating from Vivado HLS](ch34_migration_vivado_hls.md) — Replacement patterns for deprecated items
-- [Chapter 18 — HLS Tcl Commands](../section4_vitis_hls_command_reference/ch18_hls_tcl_commands.md) — Current Tcl command syntax
+- [Chapter 18 — HLS Tcl Commands](../section04_vitis_hls_command_reference/ch18_hls_tcl_commands.md) — Current Tcl command syntax
 
 ---
 

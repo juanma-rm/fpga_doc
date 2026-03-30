@@ -1,4 +1,4 @@
-# Chapter 13: Building and Running an HLS Component
+﻿# Chapter 13: Building and Running an HLS Component
 
 > Source: UG1399 (v2025.2) January 22, 2026 — Vitis HLS User Guide, Section III: Vitis HLS Flow Steps, pages 336–448.
 
@@ -858,8 +858,8 @@ Three flows to access pre-built L1 HLS functions:
 
 - [Chapter 12 — Launching the Vitis Unified IDE](ch12_launching_vitis_ide.md) — IDE startup and workspace setup
 - [Chapter 14 — HLS Command Line](ch14_hls_command_line.md) — Command-line equivalents of all IDE operations
-- [Chapter 16 — HLS Config File Commands](../section4_vitis_hls_command_reference/ch16_config_file_commands.md) — All `syn.*`, `csim.*`, `cosim.*`, `vivado.*` settings
-- [Chapter 17 — HLS Pragmas](../section4_vitis_hls_command_reference/ch17_hls_pragmas.md) — Pragma reference for optimization directives
+- [Chapter 16 — HLS Config File Commands](../section04_vitis_hls_command_reference/ch16_config_file_commands.md) — All `syn.*`, `csim.*`, `cosim.*`, `vivado.*` settings
+- [Chapter 17 — HLS Pragmas](../section04_vitis_hls_command_reference/ch17_hls_pragmas.md) — Pragma reference for optimization directives
 
 ---
 

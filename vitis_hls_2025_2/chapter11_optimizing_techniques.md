@@ -1,4 +1,4 @@
-# Chapter 11: Optimizing Techniques and Troubleshooting Tips
+﻿# Chapter 11: Optimizing Techniques and Troubleshooting Tips
 
 > **Source:** Vitis HLS User Guide UG1399 v2025.2, Chapter 11, Pages 265–329
 
@@ -790,8 +790,8 @@ void dut(int in[M], int out[M]) {
 - [Chapter 2 — Abstract Parallel Programming](ch02_abstract_parallel_programming.md) — Dataflow and `hls::task` fundamentals
 - [Chapter 3 — Loops Primer](ch03_loops_primer.md) — Loop pipelining and unrolling basics
 - [Chapter 8 — Interfaces](ch08_interfaces.md) — AXI interface burst inference and struct alignment
-- [Chapter 17 — HLS Pragmas](../section4_vitis_hls_command_reference/ch17_hls_pragmas.md) — All optimization pragmas
-- [Chapter 31 — HLS IP Libraries](../section6_vitis_hls_libraries_reference/ch31_hls_ip_libraries.md) — DSP intrinsics for expression matching
+- [Chapter 17 — HLS Pragmas](../section04_vitis_hls_command_reference/ch17_hls_pragmas.md) — All optimization pragmas
+- [Chapter 31 — HLS IP Libraries](../section06_vitis_hls_libraries_reference/ch31_hls_ip_libraries.md) — DSP intrinsics for expression matching
 
 ---
 

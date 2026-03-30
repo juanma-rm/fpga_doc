@@ -1,4 +1,4 @@
-# Chapter 36 — Unsupported Features
+﻿# Chapter 36 — Unsupported Features
 
 > UG1399 (v2025.2) · Section VII: Vitis HLS Migration Guide · Pages 887–888
 
@@ -96,7 +96,7 @@ The `hls_video.h` library (video utilities and functions) is **deprecated** and 
 ### See Also
 
 - [Chapter 35 — Deprecated Features](ch35_deprecated_unsupported.md) — Deprecated (not yet removed) items
-- [Chapter 7 — Unsupported Constructs](../section2_hls_programmers_guide/ch07_unsupported_constructs.md) — Unsupported C/C++ constructs
+- [Chapter 7 — Unsupported Constructs](../section02_hls_programmers_guide/ch07_unsupported_constructs.md) — Unsupported C/C++ constructs
 
 ---
 

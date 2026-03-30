@@ -1,4 +1,4 @@
-# Chapter 10: Top-Level Performance Pragma
+﻿# Chapter 10: Top-Level Performance Pragma
 
 > **Source:** Vitis HLS User Guide UG1399 v2025.2, Chapter 10, Pages 260–264
 
@@ -212,8 +212,8 @@ The tool may infer very aggressive targets for specific loops (minimal resource 
 ### See Also
 
 - [Chapter 3 — Loops Primer](ch03_loops_primer.md) — Manual loop pipelining and unrolling
-- [Chapter 17 — HLS Pragmas](../section4_vitis_hls_command_reference/ch17_hls_pragmas.md) — `PERFORMANCE`, `PIPELINE`, `UNROLL` pragma syntax
-- [Chapter 16 — Config File Commands](../section4_vitis_hls_command_reference/ch16_config_file_commands.md) — `syn.compile.pipeline_loops` auto-pipelining threshold
+- [Chapter 17 — HLS Pragmas](../section04_vitis_hls_command_reference/ch17_hls_pragmas.md) — `PERFORMANCE`, `PIPELINE`, `UNROLL` pragma syntax
+- [Chapter 16 — Config File Commands](../section04_vitis_hls_command_reference/ch16_config_file_commands.md) — `syn.compile.pipeline_loops` auto-pipelining threshold
 
 ---
 

@@ -1,4 +1,4 @@
-# Chapter 29 — HLS Split/Merge Library
+﻿# Chapter 29 — HLS Split/Merge Library
 
 > UG1399 (v2025.2) · Section VI: Vitis HLS Libraries Reference · Pages 829–833
 
@@ -165,7 +165,7 @@ This pattern allows a single M_AXI read/write port to feed multiple compute engi
 
 - [Chapter 24 — HLS Stream Library](ch24_hls_stream_library.md) — `hls::stream` fundamentals
 - [Chapter 28 — HLS Task Library](ch28_hls_task_library.md) — Combining split/merge with `hls::task`
-- [Chapter 2 — Abstract Parallel Programming](../section2_hls_programmers_guide/ch02_abstract_parallel_programming.md) — Parallel dataflow patterns
+- [Chapter 2 — Abstract Parallel Programming](../section02_hls_programmers_guide/ch02_abstract_parallel_programming.md) — Parallel dataflow patterns
 
 ---
 

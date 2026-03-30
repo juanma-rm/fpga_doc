@@ -1,4 +1,4 @@
-# Appendix C — Additional Resources and Legal Notices
+﻿# Appendix C — Additional Resources and Legal Notices
 
 > UG1399 (v2025.2) · Pages 900–904
 
@@ -90,7 +90,7 @@ For Answers, Documentation, Downloads, and Forums: see AMD Support at https://su
 
 ### See Also
 
-- [Section I — Introduction](../section1_introduction/section_intro.md) — Vitis HLS overview and tool basics
+- [Section I — Introduction](../section01_introduction/section_intro.md) — Vitis HLS overview and tool basics
 - [Appendix A — Tcl to Config File Map](appendix_a_tcl_config_map.md) — Cross-reference table
 
 ---

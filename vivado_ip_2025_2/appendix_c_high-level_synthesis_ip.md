@@ -1,4 +1,4 @@
-# Appendix C: High-Level Synthesis IP
+﻿# Appendix C: High-Level Synthesis IP
 
 This appendix covers IP file and directory structure, output products, associated file types, and COE file usage.
 
@@ -149,8 +149,8 @@ The COE file is a high-level method for specifying initial memory contents. When
 
 ## See Also
 
-- [Chapter 2: IP Basics](chapter2_ip_basics.md) — IP output products, customization
-- [Chapter 4: Using IP in Non-Project Mode](chapter4_using_ip_in_non-project_mode.md) — Tcl commands for generating outputs
+- [Chapter 2: IP Basics](chapter02_ip_basics.md) — IP output products, customization
+- [Chapter 4: Using IP in Non-Project Mode](chapter04_using_ip_in_non-project_mode.md) — Tcl commands for generating outputs
 
 ---
 

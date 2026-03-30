@@ -1,4 +1,4 @@
-# Appendix A: Additional Resources and Legal Notices
+﻿# Appendix A: Additional Resources and Legal Notices
 
 > Source: *UG1702 Vitis Accelerated Reference Guide* v2025.2, Appendix A (pp. 485–488)
 
@@ -98,8 +98,8 @@ For support resources such as Answers, Documentation, Downloads, and Forums, vis
 
 ## See Also
 
-- [Chapter 1: Navigating Content by Design Process](chapter1_navigating_content_by_design_process.md) — Design process navigation
-- [Chapter 2: Vitis Commands and Utilities](chapter2_vitis_commands_and_utilities.md) — Command-line reference
+- [Chapter 1: Navigating Content by Design Process](chapter01_navigating_content_by_design_process.md) — Design process navigation
+- [Chapter 2: Vitis Commands and Utilities](chapter02_vitis_commands_and_utilities.md) — Command-line reference
 
 ---
 

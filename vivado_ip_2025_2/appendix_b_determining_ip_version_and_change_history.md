@@ -1,4 +1,4 @@
-# Appendix B: Determining IP Version and Change History
+﻿# Appendix B: Determining IP Version and Change History
 
 This appendix explains why IP becomes locked and provides recommendations for resolving each lock condition.
 
@@ -88,7 +88,7 @@ AMD Vivado IP cores become **locked** for several reasons. The Vivado IDE provid
 
 ## See Also
 
-- [Chapter 2: IP Basics — Upgrading IP](chapter2_ip_basics.md#upgrading-ip)
+- [Chapter 2: IP Basics — Upgrading IP](chapter02_ip_basics.md#upgrading-ip)
 - [Appendix D: Using IP Across Software Versions](appendix_d_using_ip_across_software_versions.md)
 
 ---

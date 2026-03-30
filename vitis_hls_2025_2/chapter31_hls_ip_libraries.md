@@ -1,4 +1,4 @@
-# Chapter 31 — HLS IP Libraries
+﻿# Chapter 31 — HLS IP Libraries
 
 > UG1399 (v2025.2) · Section VI: Vitis HLS Libraries Reference · Pages 843–870
 
@@ -429,8 +429,8 @@ valid_sr.shift(new_valid, 7, pipeline_enable);
 ### See Also
 
 - [Chapter 23 — HLS Math Library](ch23_hls_math_library.md) — Math functions (some share DSP IP)
-- [Chapter 11 — Optimizing Techniques](../section2_hls_programmers_guide/ch11_optimizing_techniques.md) — Expression balancing and DSP matching
-- [Chapter 17 — HLS Pragmas](../section4_vitis_hls_command_reference/ch17_hls_pragmas.md) — `BIND_OP`, `BIND_STORAGE` pragmas
+- [Chapter 11 — Optimizing Techniques](../section02_hls_programmers_guide/ch11_optimizing_techniques.md) — Expression balancing and DSP matching
+- [Chapter 17 — HLS Pragmas](../section04_vitis_hls_command_reference/ch17_hls_pragmas.md) — `BIND_OP`, `BIND_STORAGE` pragmas
 
 ---
 

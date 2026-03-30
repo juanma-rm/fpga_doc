@@ -1,4 +1,4 @@
-# Appendix A: Using the Tcl Console to Manage IP
+﻿# Appendix A: Using the Tcl Console to Manage IP
 
 This appendix provides a Tcl-based workflow for managing IP from the Vivado Tcl console, including scripting examples for source control integration.
 
@@ -67,7 +67,7 @@ get_files -all -of_objects [get_files <ip_name>.xci]
 
 ## See Also
 
-- [Chapter 4: Using IP in Non-Project Mode](chapter4_using_ip_in_non-project_mode.md) — Full Tcl command reference table and scripting examples
+- [Chapter 4: Using IP in Non-Project Mode](chapter04_using_ip_in_non-project_mode.md) — Full Tcl command reference table and scripting examples
 - Vivado Design Suite User Guide: Using Tcl Scripting (UG894)
 - Vivado Design Suite Tcl Command Reference Guide (UG835)
 

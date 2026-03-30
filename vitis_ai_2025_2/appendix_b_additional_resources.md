@@ -1,4 +1,4 @@
-# Appendix B — Additional Resources and Legal Notices
+﻿# Appendix B — Additional Resources and Legal Notices
 
 Documentation access, reference documents, and complete revision history for UG1414 Vitis AI User Guide.
 
@@ -92,9 +92,9 @@ Answers, Documentation, Downloads, and Forums available at AMD Support.
 
 ## See Also
 
-- [Chapter 1 — Vitis AI Overview](chapter1_vitis_ai_overview.md) — System requirements and installation
-- [Chapter 5 — Deploying and Running](chapter5_deploying_and_running_the_model.md) — VART APIs and deployment
-- [Chapter 6 — Profiling](chapter6_profiling_the_model.md) — vaitrace and Vitis Analyzer
+- [Chapter 1 — Vitis AI Overview](chapter01_vitis_ai_overview.md) — System requirements and installation
+- [Chapter 5 — Deploying and Running](chapter05_deploying_and_running_the_model.md) — VART APIs and deployment
+- [Chapter 6 — Profiling](chapter06_profiling_the_model.md) — vaitrace and Vitis Analyzer
 
 ---
 

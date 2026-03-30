@@ -1,4 +1,4 @@
-# Chapter 12: Launching the Vitis Unified IDE
+﻿# Chapter 12: Launching the Vitis Unified IDE
 
 > Source: UG1399 (v2025.2) January 22, 2026 — Vitis HLS User Guide, Section III: Vitis HLS Flow Steps, pages 331–335.
 
@@ -148,7 +148,7 @@ vitis -w /path/to/my_workspace
 
 - [Chapter 13 — Building and Running an HLS Component](ch13_building_hls_component.md) — Detailed steps for each Flow Navigator stage
 - [Chapter 14 — HLS Command Line](ch14_hls_command_line.md) — Command-line equivalents of all IDE operations
-- [Chapter 15 — Vitis Commands](../section4_vitis_hls_command_reference/ch15_vitis_commands.md) — `vitis`, `v++`, `vitis-run` reference
+- [Chapter 15 — Vitis Commands](../section04_vitis_hls_command_reference/ch15_vitis_commands.md) — `vitis`, `v++`, `vitis-run` reference
 
 ---
 

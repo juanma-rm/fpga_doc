@@ -1,4 +1,4 @@
-# Appendix A: Additional Resources and Legal Notices
+﻿# Appendix A: Additional Resources and Legal Notices
 
 This appendix provides links to additional AMD documentation, support resources, reference documents, and training materials for the Vivado Design Suite.
 
@@ -39,7 +39,7 @@ The **AMD Technical Information Portal** is an online tool that provides robust 
 
 ### See Also
 
-- [Chapter 3: Documentation Navigator](chapter3_learning_about_the_vivado_design_suite.md#documentation-navigator)
+- [Chapter 3: Documentation Navigator](chapter03_learning_about_the_vivado_design_suite.md#documentation-navigator)
 
 ---
 

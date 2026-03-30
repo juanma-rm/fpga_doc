@@ -1,4 +1,4 @@
-# Chapter 14: Creating HLS Components from the Command Line
+﻿# Chapter 14: Creating HLS Components from the Command Line
 
 > Source: UG1399 (v2025.2) January 22, 2026 — Vitis HLS User Guide, Section III: Vitis HLS Flow Steps, pages 449–452.
 
@@ -197,8 +197,8 @@ syn.output.format=xo          # xo = Vitis kernel; ip_catalog = Vivado IP
 ### See Also
 
 - [Chapter 13 — Building and Running an HLS Component](ch13_building_hls_component.md) — IDE-based equivalent of command-line operations
-- [Chapter 15 — Vitis Commands](../section4_vitis_hls_command_reference/ch15_vitis_commands.md) — `vitis`, `v++`, `vitis-run` detailed reference
-- [Chapter 16 — HLS Config File Commands](../section4_vitis_hls_command_reference/ch16_config_file_commands.md) — All `syn.*`, `cosim.*`, `vivado.*` settings
+- [Chapter 15 — Vitis Commands](../section04_vitis_hls_command_reference/ch15_vitis_commands.md) — `vitis`, `v++`, `vitis-run` detailed reference
+- [Chapter 16 — HLS Config File Commands](../section04_vitis_hls_command_reference/ch16_config_file_commands.md) — All `syn.*`, `cosim.*`, `vivado.*` settings
 
 ---
 

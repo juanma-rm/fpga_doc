@@ -1,4 +1,4 @@
-# Chapter 27 — HLS Vector Library
+﻿# Chapter 27 — HLS Vector Library
 
 > UG1399 (v2025.2) · Section VI: Vitis HLS Libraries Reference · Pages 818–820
 
@@ -161,8 +161,8 @@ Lexicographic order on vectors, returning `bool`:
 
 ### See Also
 
-- [Chapter 6 — Data Types (Vector Data Types)](../section2_hls_programmers_guide/ch06_data_types.md#10-vector-data-types) — Overview and usage context
-- [Chapter 4 — Arrays Primer](../section2_hls_programmers_guide/ch04_arrays_primer.md) — Array partitioning for parallel access
+- [Chapter 6 — Data Types (Vector Data Types)](../section02_hls_programmers_guide/ch06_data_types.md#10-vector-data-types) — Overview and usage context
+- [Chapter 4 — Arrays Primer](../section02_hls_programmers_guide/ch04_arrays_primer.md) — Array partitioning for parallel access
 - [Chapter 24 — HLS Stream Library](ch24_hls_stream_library.md) — Streaming vector data between tasks
 
 ---

@@ -18,90 +18,90 @@
 
 ## Section I - Getting Started
 
-### [Section I Overview — Getting Started with Vitis](section1_getting_started_intro.md)
+### [Section I Overview — Getting Started with Vitis](section01_getting_started_intro.md)
 
-### [Chapter 1 — Navigating Content by Design Process](chapter1_navigating.md)
+### [Chapter 1 — Navigating Content by Design Process](chapter01_navigating.md)
 
-- [Embedded Software Development Design Process](chapter1_navigating.md#navigating-content-by-design-process)
+- [Embedded Software Development Design Process](chapter01_navigating.md#navigating-content-by-design-process)
 
-### [Chapter 2 — Vitis Software Platform Installation](chapter2_installation.md)
+### [Chapter 2 — Vitis Software Platform Installation](chapter02_installation.md)
 
-- [Prerequisites](chapter2_installation.md#prerequisites)
-- [Installation Steps](chapter2_installation.md#installation-steps)
-- [Post-Installation](chapter2_installation.md#post-installation)
+- [Prerequisites](chapter02_installation.md#prerequisites)
+- [Installation Steps](chapter02_installation.md#installation-steps)
+- [Post-Installation](chapter02_installation.md#post-installation)
 
-### [Chapter 3 — Getting Started with the Vitis Software Platform](chapter3_getting_started.md)
+### [Chapter 3 — Getting Started with the Vitis Software Platform](chapter03_getting_started.md)
 
-- [Vitis Unified Software Platform Overview](chapter3_getting_started.md#vitis-unified-software-platform-overview)
-- [Vitis Software Development Workflow](chapter3_getting_started.md#vitis-software-development-workflow)
+- [Vitis Unified Software Platform Overview](chapter03_getting_started.md#vitis-unified-software-platform-overview)
+- [Vitis Software Development Workflow](chapter03_getting_started.md#vitis-software-development-workflow)
 
 ---
 
 ## Section II - Using the Vitis Unified IDE
 
-### [Section II Overview — Using the Vitis Unified IDE](section2_using_the_vitis_unified_ide_intro.md)
+### [Section II Overview — Using the Vitis Unified IDE](section02_using_the_vitis_unified_ide_intro.md)
 
-### [Chapter 4 — Launching the Vitis Unified IDE](chapter4_launching_vitis_ide.md)
+### [Chapter 4 — Launching the Vitis Unified IDE](chapter04_launching_vitis_ide.md)
 
-- [Environment Setup](chapter4_launching_vitis_ide.md#environment-setup)
-- [Launch Modes](chapter4_launching_vitis_ide.md#launch-modes)
-- [Command Reference](chapter4_launching_vitis_ide.md#command-reference)
+- [Environment Setup](chapter04_launching_vitis_ide.md#environment-setup)
+- [Launch Modes](chapter04_launching_vitis_ide.md#launch-modes)
+- [Command Reference](chapter04_launching_vitis_ide.md#command-reference)
 
-### [Chapter 5 — Vitis Unified IDE Views and Features](chapter5_ide_views_and_features.md)
+### [Chapter 5 — Vitis Unified IDE Views and Features](chapter05_ide_views_and_features.md)
 
-- [IDE Layout Overview](chapter5_ide_views_and_features.md#ide-layout-overview)
-- [Vitis Explorer View](chapter5_ide_views_and_features.md#vitis-explorer-view)
-- [Search View](chapter5_ide_views_and_features.md#search-view)
-- [Source Control (Git)](chapter5_ide_views_and_features.md#source-control-git)
-- [Debug View](chapter5_ide_views_and_features.md#debug-view)
-- [Code View and Smart Editor](chapter5_ide_views_and_features.md#code-view-and-smart-editor)
-- [Workspace Journal](chapter5_ide_views_and_features.md#workspace-journal)
-- [Preferences](chapter5_ide_views_and_features.md#preferences)
-- [Keyboard Shortcuts and Command Palette](chapter5_ide_views_and_features.md#keyboard-shortcuts-and-command-palette)
+- [IDE Layout Overview](chapter05_ide_views_and_features.md#ide-layout-overview)
+- [Vitis Explorer View](chapter05_ide_views_and_features.md#vitis-explorer-view)
+- [Search View](chapter05_ide_views_and_features.md#search-view)
+- [Source Control (Git)](chapter05_ide_views_and_features.md#source-control-git)
+- [Debug View](chapter05_ide_views_and_features.md#debug-view)
+- [Code View and Smart Editor](chapter05_ide_views_and_features.md#code-view-and-smart-editor)
+- [Workspace Journal](chapter05_ide_views_and_features.md#workspace-journal)
+- [Preferences](chapter05_ide_views_and_features.md#preferences)
+- [Keyboard Shortcuts and Command Palette](chapter05_ide_views_and_features.md#keyboard-shortcuts-and-command-palette)
 
-### [Chapter 6 — Develop](chapter6_develop.md)
+### [Chapter 6 — Develop](chapter06_develop.md)
 
-- [Managing Platforms and Platform Repositories](chapter6_develop.md#managing-platforms-and-platform-repositories)
-- [Target Platform](chapter6_develop.md#target-platform)
-- [Applications](chapter6_develop.md#applications)
-- [Creating a Library Project](chapter6_develop.md#creating-a-library-project)
+- [Managing Platforms and Platform Repositories](chapter06_develop.md#managing-platforms-and-platform-repositories)
+- [Target Platform](chapter06_develop.md#target-platform)
+- [Applications](chapter06_develop.md#applications)
+- [Creating a Library Project](chapter06_develop.md#creating-a-library-project)
 
-### [Chapter 7 — Run, Debug, and Optimize](chapter7_run_debug_optimize.md)
+### [Chapter 7 — Run, Debug, and Optimize](chapter07_run_debug_optimize.md)
 
-- [Launch Configurations](chapter7_run_debug_optimize.md#launch-configurations)
-- [Target Connections](chapter7_run_debug_optimize.md#target-connections)
-- [Running the Application](chapter7_run_debug_optimize.md#running-the-application)
-- [Debugging](chapter7_run_debug_optimize.md#debugging)
-- [PS Trace](chapter7_run_debug_optimize.md#ps-trace)
-- [Cross-Triggering](chapter7_run_debug_optimize.md#cross-triggering)
-- [Profile / Analyze](chapter7_run_debug_optimize.md#profile--analyze)
-- [Creating a Boot Image](chapter7_run_debug_optimize.md#creating-a-boot-image)
-- [Programming Flash](chapter7_run_debug_optimize.md#programming-flash)
-- [Multi-Cable and Multi-Device Support](chapter7_run_debug_optimize.md#multi-cable-and-multi-device-support)
+- [Launch Configurations](chapter07_run_debug_optimize.md#launch-configurations)
+- [Target Connections](chapter07_run_debug_optimize.md#target-connections)
+- [Running the Application](chapter07_run_debug_optimize.md#running-the-application)
+- [Debugging](chapter07_run_debug_optimize.md#debugging)
+- [PS Trace](chapter07_run_debug_optimize.md#ps-trace)
+- [Cross-Triggering](chapter07_run_debug_optimize.md#cross-triggering)
+- [Profile / Analyze](chapter07_run_debug_optimize.md#profile--analyze)
+- [Creating a Boot Image](chapter07_run_debug_optimize.md#creating-a-boot-image)
+- [Programming Flash](chapter07_run_debug_optimize.md#programming-flash)
+- [Multi-Cable and Multi-Device Support](chapter07_run_debug_optimize.md#multi-cable-and-multi-device-support)
 
-### [Chapter 8 — User Managed Mode](chapter8_user_managed_mode.md)
+### [Chapter 8 — User Managed Mode](chapter08_user_managed_mode.md)
 
-- [Activating User Managed Mode](chapter8_user_managed_mode.md#activating-user-managed-mode)
-- [Build Configuration](chapter8_user_managed_mode.md#build-configuration)
-- [Debug Configuration](chapter8_user_managed_mode.md#debug-configuration)
+- [Activating User Managed Mode](chapter08_user_managed_mode.md#activating-user-managed-mode)
+- [Build Configuration](chapter08_user_managed_mode.md#build-configuration)
+- [Debug Configuration](chapter08_user_managed_mode.md#debug-configuration)
 
-### [Chapter 9 — Vitis Utilities](chapter9_vitis_utilities.md)
+### [Chapter 9 — Vitis Utilities](chapter09_vitis_utilities.md)
 
-- [Software Debugger](chapter9_vitis_utilities.md#software-debugger)
-- [Program Device](chapter9_vitis_utilities.md#program-device)
-- [Vitis Terminal](chapter9_vitis_utilities.md#vitis-terminal)
-- [Project Export and Import](chapter9_vitis_utilities.md#project-export-and-import)
+- [Software Debugger](chapter09_vitis_utilities.md#software-debugger)
+- [Program Device](chapter09_vitis_utilities.md#program-device)
+- [Vitis Terminal](chapter09_vitis_utilities.md#vitis-terminal)
+- [Project Export and Import](chapter09_vitis_utilities.md#project-export-and-import)
 
 ---
 
 ## Section III - Vitis Python API
 
-### [Section III Overview — Vitis Python API](section3_vitis_python_api_intro.md)
+### [Section III Overview — Vitis Python API](section03_vitis_python_api_intro.md)
 
-- [Enabling the Vitis API in a Python ENV](section3_vitis_python_api_intro.md#enabling-the-vitis-api-in-a-python-env)
-- [Python API: A Command-line Tool](section3_vitis_python_api_intro.md#python-api-a-command-line-tool)
-- [Executing Python APIs](section3_vitis_python_api_intro.md#executing-python-apis)
-- [Managing Vitis IDE Components through Python APIs](section3_vitis_python_api_intro.md#managing-vitis-ide-components-through-python-apis)
+- [Enabling the Vitis API in a Python ENV](section03_vitis_python_api_intro.md#enabling-the-vitis-api-in-a-python-env)
+- [Python API: A Command-line Tool](section03_vitis_python_api_intro.md#python-api-a-command-line-tool)
+- [Executing Python APIs](section03_vitis_python_api_intro.md#executing-python-apis)
+- [Managing Vitis IDE Components through Python APIs](section03_vitis_python_api_intro.md#managing-vitis-ide-components-through-python-apis)
 
 ### [Chapter 10 — Python Vitis Commands](chapter10_python_vitis_commands.md)
 
@@ -118,7 +118,7 @@
 
 ## Section IV - XSDB Command Usage
 
-### [Section IV — XSDB Command Usage](section4_xsdb_command_usage.md)
+### [Section IV — XSDB Command Usage](section04_xsdb_command_usage.md)
 
 > See *Software Debugger Reference Guide (UG1725)* for complete XSDB command reference.
 
@@ -126,24 +126,24 @@
 
 ## Section V - XSCT to Python API Migration
 
-### [Section V — XSCT to Python API Migration](section5_xsct_migration.md)
+### [Section V — XSCT to Python API Migration](section05_xsct_migration.md)
 
-- [Overview](section5_xsct_migration.md#overview)
-- [app — Application Project Management](section5_xsct_migration.md#app--application-project-management)
-- [bsp — BSP Configuration](section5_xsct_migration.md#bsp--bsp-configuration)
-- [createdts — Device Tree Creation](section5_xsct_migration.md#createdts--device-tree-creation)
-- [domain — Domain Management](section5_xsct_migration.md#domain--domain-management)
-- [getws / setws — Workspace Management](section5_xsct_migration.md#getws--setws--workspace-management)
-- [platform — Platform Management](section5_xsct_migration.md#platform--platform-management)
-- [repo — Software Repositories](section5_xsct_migration.md#repo--software-repositories)
-- [sysproj — System Project Management](section5_xsct_migration.md#sysproj--system-project-management)
-- [Key Migration Differences](section5_xsct_migration.md#key-migration-differences)
+- [Overview](section05_xsct_migration.md#overview)
+- [app — Application Project Management](section05_xsct_migration.md#app--application-project-management)
+- [bsp — BSP Configuration](section05_xsct_migration.md#bsp--bsp-configuration)
+- [createdts — Device Tree Creation](section05_xsct_migration.md#createdts--device-tree-creation)
+- [domain — Domain Management](section05_xsct_migration.md#domain--domain-management)
+- [getws / setws — Workspace Management](section05_xsct_migration.md#getws--setws--workspace-management)
+- [platform — Platform Management](section05_xsct_migration.md#platform--platform-management)
+- [repo — Software Repositories](section05_xsct_migration.md#repo--software-repositories)
+- [sysproj — System Project Management](section05_xsct_migration.md#sysproj--system-project-management)
+- [Key Migration Differences](section05_xsct_migration.md#key-migration-differences)
 
 ---
 
 ## Section VI - GNU Compiler Tools
 
-### [Section VI Overview — GNU Compiler Tools](section6_gnu_compiler_tools_intro.md)
+### [Section VI Overview — GNU Compiler Tools](section06_gnu_compiler_tools_intro.md)
 
 ### [Chapter 13 — Overview](chapter13_overview.md)
 
@@ -179,17 +179,17 @@
 
 ## Section VII - Embedded Design Tutorials
 
-### [Section VII — Embedded Design Tutorials](section7_tutorials.md)
+### [Section VII — Embedded Design Tutorials](section07_tutorials.md)
 
-- [Available Tutorials](section7_tutorials.md#available-tutorials)
+- [Available Tutorials](section07_tutorials.md#available-tutorials)
 
 ---
 
 ## Section VIII - Drivers and Libraries
 
-### [Section VIII — Drivers and Libraries](section8_drivers_and_libraries.md)
+### [Section VIII — Drivers and Libraries](section08_drivers_and_libraries.md)
 
-- [Bare-metal Drivers and Libraries](section8_drivers_and_libraries.md#resources)
+- [Bare-metal Drivers and Libraries](section08_drivers_and_libraries.md#resources)
 
 ---
 

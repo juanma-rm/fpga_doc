@@ -1,4 +1,4 @@
-# Appendix A — Error Codes
+﻿# Appendix A — Error Codes
 
 Comprehensive error code reference for all Vitis AI components: Optimizer, Quantizer (TF1.x, TF2.x, PyTorch), WeGO, Compiler (XCOM), Vitis AI Library (VAILIB), VART Runtime, XIR, and Target Factory.
 
@@ -351,10 +351,10 @@ Comprehensive error code reference for all Vitis AI components: Optimizer, Quant
 
 ## See Also
 
-- [Chapter 2 — Optimizing the Model](chapter2_optimizing_the_model.md) — Optimizer errors
-- [Chapter 3 — Quantizing the Model](chapter3_quantizing_the_model.md) — Quantizer errors
-- [Chapter 4 — Compiling the Model](chapter4_compiling_the_model.md) — Compiler (XCOM) errors
-- [Chapter 5 — Deploying and Running the Model](chapter5_deploying_and_running_the_model.md) — VART, VAILIB, WeGO errors
+- [Chapter 2 — Optimizing the Model](chapter02_optimizing_the_model.md) — Optimizer errors
+- [Chapter 3 — Quantizing the Model](chapter03_quantizing_the_model.md) — Quantizer errors
+- [Chapter 4 — Compiling the Model](chapter04_compiling_the_model.md) — Compiler (XCOM) errors
+- [Chapter 5 — Deploying and Running the Model](chapter05_deploying_and_running_the_model.md) — VART, VAILIB, WeGO errors
 
 ---
 

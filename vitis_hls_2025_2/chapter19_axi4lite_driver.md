@@ -1,4 +1,4 @@
-# Chapter 19 — AXI4-Lite Slave C Driver Reference
+﻿# Chapter 19 — AXI4-Lite Slave C Driver Reference
 
 > UG1399 (v2025.2) · Section V: Vitis HLS C Driver Reference · Pages 713–727
 
@@ -504,9 +504,9 @@ u32 X<DUT>_InterruptGetStatus(X<DUT> *InstancePtr);
 
 ### See Also
 
-- [Chapter 8 — Interfaces](../section2_hls_programmers_guide/ch08_interfaces.md) — AXI4-Lite interface setup (`s_axilite`)
-- [Chapter 25 — HLS Direct I/O](../section6_vitis_hls_libraries_reference/ch25_hls_direct_io.md) — Direct I/O port library
-- [Chapter 17 — HLS Pragmas](../section4_vitis_hls_command_reference/ch17_hls_pragmas.md) — `INTERFACE` pragma reference
+- [Chapter 8 — Interfaces](../section02_hls_programmers_guide/ch08_interfaces.md) — AXI4-Lite interface setup (`s_axilite`)
+- [Chapter 25 — HLS Direct I/O](../section06_vitis_hls_libraries_reference/ch25_hls_direct_io.md) — Direct I/O port library
+- [Chapter 17 — HLS Pragmas](../section04_vitis_hls_command_reference/ch17_hls_pragmas.md) — `INTERFACE` pragma reference
 
 ---
 
